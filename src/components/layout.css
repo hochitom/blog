@@ -38,12 +38,17 @@ template {
   display: none;
 }
 a {
+  color: #f02970;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
 a:active,
 a:hover {
   outline-width: 0;
+}
+a:hover {
+  text-decoration: none;
+  color: #c21653;
 }
 abbr[title] {
   border-bottom: none;
@@ -621,4 +626,10 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+}
+
+.wrapper { 
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
 }

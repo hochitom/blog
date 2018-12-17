@@ -2,31 +2,17 @@ import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import './branding.css'
+
 const Header = ({ siteTitle }) => (
-  <div
-    style={{
-      background: 'rebeccapurple',
-      marginBottom: '1.45rem',
-    }}
-  >
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '1.45rem 1.0875rem',
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: 'white',
-            textDecoration: 'none',
-          }}
-        >
+  <div class="branding">
+    <div class="wrapper">
+      <h1 class="branding__title">
+        <Link to="/">
           {siteTitle}
         </Link>
       </h1>
+      <p>Hi <span role="img" aria-label="waving hand">👋🏼</span> I'm Thomas, a self-taught Frontend Developer from Austria<span role="img" aria-label="austrian flag">🇦🇹</span>. This is my blog where i write mostly in german <span role="img" aria-label="german flag">🇩🇪</span> about topics I'm interested in.</p>
     </div>
   </div>
 )
