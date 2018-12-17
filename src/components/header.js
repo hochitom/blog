@@ -12,7 +12,7 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
-      <p>Hi <span role="img" aria-label="waving hand">👋🏼</span> I'm Thomas, a self-taught Frontend Developer from Austria<span role="img" aria-label="austrian flag">🇦🇹</span>. This is my blog where i write mostly in german <span role="img" aria-label="german flag">🇩🇪</span> about topics I'm interested in.</p>
+      <p>Hi <span role="img" aria-label="waving hand">👋🏼</span> I'm Thomas, a self-taught Frontend Developer from Austria<span role="img" aria-label="austrian flag">🇦🇹</span>. This is my blog where i write mostly in german <span role="img" aria-label="german flag">🇩🇪</span> about topics I'm interested in. <Link to="/ueber-mich/">more</Link></p>
     </div>
   </div>
 )
