@@ -16,11 +16,9 @@ class Home extends Component {
         <ul>
           {posts.edges.map(({ node }) => (
             <li>
-              <h3>
-                <Link to={node.slug}>
-                  {node.title}
-                </Link>
-              </h3>
+              <Link to={node.slug}>
+                <span dangerouslySetInnerHTML={{ __html: node.title }} />
+              </Link>
             </li>
           ))}
         </ul>
