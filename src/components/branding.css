@@ -21,3 +21,7 @@
     color: #fff;
     text-decoration: none;
 }
+
+.branding__title a:hover {
+    color: #fff;
+}
