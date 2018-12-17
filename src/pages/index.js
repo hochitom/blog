@@ -2,15 +2,11 @@ import React, { Component } from 'react'
 import { Link, graphql } from 'gatsby'
 
 import Layout from '../components/layout'
-// import Image from '../components/image'
 import SEO from '../components/seo'
-
-// import { rhythm } from '../utils/typography'
 
 class Home extends Component {
   render() {
     const posts = this.props.data.allWordpressPost
-    // const posts = this.props.data.allContentfulArticle
 
     return(
       <Layout>
@@ -49,18 +45,3 @@ export const pageQuery = graphql`
     }
   }
 `
-
-// export const pageQuery = graphql`
-//   query {
-//     allContentfulArticle(limit: 100) {
-//       edges {
-//         node {
-//           id,
-//           title {
-//             title
-//           }
-//         }
-//       }
-//     }
-//   }
-// `
