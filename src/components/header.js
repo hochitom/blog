@@ -5,9 +5,9 @@ import React from 'react'
 import './branding.css'
 
 const Header = ({ siteTitle }) => (
-  <div class="branding">
-    <div class="wrapper">
-      <h1 class="branding__title">
+  <div className="branding">
+    <div className="wrapper">
+      <h1 className="branding__title">
         <Link to="/">
           {siteTitle}
         </Link>
