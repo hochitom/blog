@@ -11,7 +11,7 @@ class PostTemplate extends Component {
 
     return (
       <Layout>
-        <SEO title="Single Post" />
+        <SEO title={post.title} />
         <h1 dangerouslySetInnerHTML={{ __html: post.title }} />
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
       </Layout>
