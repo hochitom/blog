@@ -88,6 +88,8 @@ sup {
   top: -.5em;
 }
 img {
+  max-width: 100%;
+  height: auto;
   border-style: none;
 }
 svg:not(:root) {
@@ -632,4 +634,8 @@ pre tt:after {
   max-width: 960px;
   margin: 0 auto;
   padding: 20px;
+}
+.wp-video, video, .wp-caption {
+  max-width: 100%!important;
+  height: auto;
 }
