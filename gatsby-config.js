@@ -3,7 +3,7 @@ module.exports = {
     title: 'hochitom.at',
     description: 'Thomas Hochörtler ist ein profesioneller Frontend-Developer aus Österreich. Auf seinem persönlichen Blog schreibt er über Themen die ihn interessieren.',
     author: '@hochitom',
-    siteUrl: `https://www.hochitom.at`
+    siteUrl: process.env.SITE_URL || `https://hochitom.at`
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -45,7 +45,7 @@ module.exports = {
         // Search and Replace Urls across WordPress content.
         searchAndReplaceContentUrls: {
           sourceUrl: "https://wp.hochitom.at",
-          replacementUrl: "https://hochitom.at",
+          replacementUrl: process.env.SITE_URL || `hochitom.at`,
         },
         auth: {
           // If you use "JWT Authentication for WP REST API" (https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/)
@@ -84,6 +84,14 @@ module.exports = {
       },
     },
     `gatsby-plugin-offline`,
-    `gatsby-plugin-sitemap`
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: 'gatsby-plugin-matomo',
+      options: {
+        siteId: process.env.MATOMO_SITE_ID || 0,
+        matomoUrl: process.env.MATOMO_URL || ``,
+        siteUrl: process.env.SITE_URL || ``
+      }
+    }
   ],
 }
