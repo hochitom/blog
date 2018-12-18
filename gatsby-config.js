@@ -3,6 +3,7 @@ module.exports = {
     title: 'hochitom.at',
     description: 'Thomas Hochörtler ist ein profesioneller Frontend-Developer aus Österreich. Auf seinem persönlichen Blog schreibt er über Themen die ihn interessieren.',
     author: '@hochitom',
+    siteUrl: `https://www.hochitom.at`
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -82,6 +83,7 @@ module.exports = {
         icon: "src/images/icon.png", // This path is relative to the root of the site.
       },
     },
-    'gatsby-plugin-offline'
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-sitemap`
   ],
 }
