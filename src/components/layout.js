@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
+import Helmet from 'react-helmet'
 import Header from './header'
 import Footer from './footer'
 import './layout.css'
@@ -19,6 +20,9 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
+        <Helmet>
+          <link rel="alternate" type="application/rss+xml" title="hochitom.at &raquo; Feed" href="https://feeds.feedburner.com/hochitomat" />
+        </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
         <div className="wrapper">
           {children}
