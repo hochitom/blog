@@ -6,7 +6,7 @@ import SEO from '../components/seo'
 
 class Home extends Component {
   render() {
-    const posts = this.props.data.allWordpressPost
+    const posts = this.props.data.allMarkdownRemark
 
     return(
       <Layout>
@@ -16,8 +16,8 @@ class Home extends Component {
         <ul>
           {posts.edges.map(({ node }) => (
             <li>
-              <Link to={node.slug}>
-                <span dangerouslySetInnerHTML={{ __html: node.title }} />
+              <Link to={node.fields.slug}>
+                <span dangerouslySetInnerHTML={{ __html: node.frontmatter.title }} />
               </Link>
             </li>
           ))}
@@ -31,13 +31,17 @@ export default Home
 
 export const pageQuery = graphql`
   query {
-    allWordpressPost(sort: { fields: [date], order: DESC }) {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
-          title
-          excerpt
-          slug
-          date
+          id,
+          fields {
+            slug
+          },
+          frontmatter {
+            title,
+            date,
+          }
         }
       }
     }

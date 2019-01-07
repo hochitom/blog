@@ -6,14 +6,13 @@ import SEO from "../components/seo"
 
 class PostTemplate extends Component {
   render() {
-    const post = this.props.data.wordpressPost
-    // const post = this.props.data.contentfulArticle
+    const post = this.props.data.markdownRemark
 
     return (
       <Layout>
         <SEO title={post.title} />
-        <h1 dangerouslySetInnerHTML={{ __html: post.title }} />
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        <h1 dangerouslySetInnerHTML={{ __html: post.frontmatter.title }} />
+        <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </Layout>
     )
   }
@@ -27,10 +26,13 @@ PostTemplate.propTypes = {
 export default PostTemplate
 
 export const pageQuery = graphql`
-  query($id: String!) {
-    wordpressPost(id: { eq: $id }) {
-      title
-      content
+  query($slug: String!) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
+      frontmatter {
+        title,
+        date,
+      },
+      html
     }
     site {
       siteMetadata {
@@ -39,21 +41,3 @@ export const pageQuery = graphql`
     }
   }
 `
-
-// export const pageQuery = graphql`
-//   query($id: String!) {
-//     contentfulArticle(id: { eq: $id }) {
-//       title {
-//         title
-//       },
-//       content {
-//         content
-//       }
-//     }
-//     site {
-//       siteMetadata {
-//         title
-//       }
-//     }
-//   }
-// `

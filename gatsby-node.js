@@ -1,108 +1,46 @@
-const _ = require(`lodash`)
-const Promise = require(`bluebird`)
 const path = require(`path`)
-const slash = require(`slash`)
+const { createFilePath } = require(`gatsby-source-filesystem`)
 
-// Implement the Gatsby API “createPages”. This is
-// called after the Gatsby bootstrap is finished so you have
-// access to any information necessary to programmatically
-// create pages.
-// Will create pages for WordPress pages (route : /{slug})
-// Will create pages for WordPress posts (route : /post/{slug})
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions
+  if (node.internal.type === `MarkdownRemark`) {
+    const fileNode = getNode(node.parent);
+    // const slug = createFilePath({ node, getNode, basePath: `data/posts` })
+    createNodeField({
+      node,
+      name: `slug`,
+      value: '/' + fileNode.relativePath.split('/')[0].replace('.md', '') + '/',
+    })
+  }
+}
+
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
-  return new Promise((resolve, reject) => {
-    // The “graphql” function allows us to run arbitrary
-    // queries against the local WordPress graphql schema. Think of
-    // it like the site has a built-in database constructed
-    // from the fetched data that you can run queries against.
-
-    // ==== PAGES (WORDPRESS NATIVE) ====
-    graphql(
-      `
-        {
-          allWordpressPage {
-            edges {
-              node {
-                id
-                slug
-                status
-                template
-              }
+  // **Note:** The graphql function call returns a Promise
+  // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise for more info
+  return graphql(`
+    {
+      allMarkdownRemark {
+        edges {
+          node {
+            fields {
+              slug
             }
           }
         }
-      `
-    )
-      .then(result => {
-        if (result.errors) {
-          console.log(result.errors)
-          reject(result.errors)
+      }
+    }
+  `).then(result => {
+    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+      createPage({
+        path: node.fields.slug,
+        component: path.resolve(`./src/templates/post.js`),
+        context: {
+          // Data passed to context is available
+          // in page queries as GraphQL variables.
+          slug: node.fields.slug
         }
-
-        // Create Page pages.
-        const pageTemplate = path.resolve("./src/templates/page.js")
-        // We want to create a detailed page for each
-        // page node. We'll just use the WordPress Slug for the slug.
-        // The Page ID is prefixed with 'PAGE_'
-        _.each(result.data.allWordpressPage.edges, edge => {
-          // Gatsby uses Redux to manage its internal state.
-          // Plugins and sites can use functions like "createPage"
-          // to interact with Gatsby.
-          createPage({
-            // Each page is required to have a `path` as well
-            // as a template component. The `context` is
-            // optional but is often necessary so the template
-            // can query data specific to each page.
-            path: `/${edge.node.slug}/`,
-            component: slash(pageTemplate),
-            context: {
-              id: edge.node.id
-            },
-          })
-        })
       })
-      // ==== END PAGES ====
-
-      // ==== POSTS (WORDPRESS NATIVE AND ACF) ====
-      .then(() => {
-        graphql(
-          `
-            {
-              allWordpressPost {
-                edges {
-                  node {
-                    id
-                    slug
-                    status
-                    template
-                    format
-                  }
-                }
-              }
-            }
-          `
-        ).then(result => {
-          if (result.errors) {
-            console.log(result.errors)
-            reject(result.errors)
-          }
-          const postTemplate = path.resolve("./src/templates/post.js")
-          // We want to create a detailed page for each
-          // post node. We'll just use the WordPress Slug for the slug.
-          // The Post ID is prefixed with 'POST_'
-          _.each(result.data.allWordpressPost.edges, edge => {
-            createPage({
-              path: `/${edge.node.slug}/`,
-              component: slash(postTemplate),
-              context: {
-                id: edge.node.id
-              },
-            })
-          })
-          resolve()
-        })
-      })
-    // ==== END POSTS ====
+    })
   })
 }
