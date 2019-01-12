@@ -7,8 +7,6 @@ tags: ["Laufen","Rennberichte"]
 
 Sonntag, 6.30 Uhr und mein Wecker klingelt wie verrückt neben mir. Ich kann mir nichts schöneres Vorstellen, aber der Wings For Life World Run stand am Programm. Nach dem Fauxpass im vorigen Jahr, wo wir schon im Auto nach Wien unterwegs waren und nochmals umdrehen mussten weil ich etwas vergessen hatte, wir aber ohnehin schon viel zu spät losgefahren sind musste diesmal ein größerer Zeitpuffer her.
 
-<!--more-->
-
 Nachdem wir das Auto in Wien geparkt haben und mit der U-Bahn zur Uni fuhren, holten wir unsere Startnummern und das Goodie-Bag. Wir, das sind in diesem Fall ich, meine Freundin und [Michael](https://michael-scheikl.at/wp/). Mit Startnummer und Goodie-Bags in unseren Händen war es dann erstmal Zeit für einen Kaffee. Bis zum Start waren es immerhin noch mehr als drei Stunden und diese mussten tot geschlagen werden.
 
 Voriges Jahr bin ich mit meiner Freundin zum ersten Mal beim Wings For Life World Run dabei gewesen. Die Strecke hat sich heuer im Vergleich zum Vorjahr verbessert. Der Start wurde nämlich vom Karlsplatz zum Rathaus verlegt, was bedeutete dass man länger in der Innenstadt gelaufen ist und ich heuer gar nicht bis in den Prater gekommen bin. Was ich aber auch gar nicht vor hatte. Denn mitgelaufen bin ich heuer eigentlich nur, weil mich meine Freundin dazu drängte. Laufen ist für mich ja nur eher ein Mittel zum Zweck, um durch den Winter zu kommen und nicht völlig auf der faulen Haut zu liegen. Dementsprechend lang war auch meine letzte Lauf-Aktivität her. Einen Monat um genau zu sein.

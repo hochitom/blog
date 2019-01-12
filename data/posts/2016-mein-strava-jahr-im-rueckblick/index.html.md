@@ -51,4 +51,4 @@ Und zum Abschluss hab ich noch ein paar Bilder
 
 ![](assets/729964632_mugl____afterwork_tour_3F06F0C8-3ED7-4730-A833-CA8BC6FD21F4.jpg "30. September, Mugl // afterwork Tour")
 
-![alt text](assets/787179929_sch_nen_1__advent_A28C97F3-D1DB-4017-9E1F-BED8C8863B16.jpg "27. November, Schönen 1. Advent")
+![Adventkranz vor dem Mountainbike](assets/787179929_sch_nen_1__advent_A28C97F3-D1DB-4017-9E1F-BED8C8863B16.jpg "27. November, Schönen 1. Advent")

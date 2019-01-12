@@ -7,8 +7,6 @@ tags: ["Saalbach","Touren","Trails"]
 
 Das vergangene Wochenende verbrachte ich gemeinsam mit Freundin und Eltern in Saalbach. Saalbach ist für uns schon so etwas wie eine zweite Heimat geworden, denn mindestens einmal im Jahr verbringe ich ein paar Tage dort. Neben dem jährlichen Schiurlaub ging es für diesmal endlich wieder zum Mountainbiken ins Pinzgau. Nachdem mein letzter Mountainbike-Urlaub im Glemmtal bereits wieder fünf Jahre her war, kam es mir sehr gelegen als mich meine Eltern fragten ob meine Freundin und ich nicht mitkommen wollen.
 
-<!--more-->
-
 ## Ein nasser Start
 
 Pünktlich als ich daheim die Räder ins Auto verfrachtete, begann es zu regnen. Der Regen begleitete uns dann auch noch bis Samstag Nachmittag, weshalb wir unsere Zeit zuerst nicht mit Mountainbiken verbrachten, sondern uns lieber [Burger in Zell am See](https://cheerfulsoul.blog/the-burger-factory/) gönnten. Am Nachmittag hörte der Regen dann endlich auf und wir unternahmen zumindest [eine kleine Runde](https://www.strava.com/activities/1084787051) Richtung Talschluss.​
@@ -21,7 +19,7 @@ Am Sonntag war das Wetter dann endlich so wie man es sich vorstellt, oder so. Zu
 
 Nach einer frischen Buttermilch ging es weiter Richtung Reiterkogel. Dafür mussten wir zuerst wieder ein paar Meter hinunter fahren. Ich nahm dafür den [Höllentrail](https://www.saalbach.com/de/tour/H%C3%B6llen%20Trail%20an%20der%20Kohlmaisgipfelbahn%20in%20Saalbach%20Hinterglemm_9801710), der direkt beim Spielberhaus startet und einem nach rund einer Minute Fahrzeit wieder ausspuckt. Dafür muss man aber ein paar Höhenmeter mehr zum Reiterkogel in Kauf nehmen. Was angesichts des Spaßfaktors der Trails durchaus in Kauf genommen werden sollte!
 
-[caption id="attachment_453" align="aligncenter" width="640"][![Bei der Auffahrt zum Reiterkogel](img_2004-1024x768.jpg)](https://wp.hochitom.at/wp-content/uploads/img_2004.jpg) Bei der Auffahrt zum Reiterkogel[/caption]
+![Bei der Auffahrt zum Reiterkogel](assets/img_2004.jpg "Bei der Auffahrt zum Reiterkogel")
 
 Die Auffahrt zum Reiterkogel beginnt recht entspannt. Vom Spielberhaus kommt man zuerst an der Bergstation der Bärnkogel-Bahn vorbei, ehe man nach viereinhalb Kilometern und rund 400 Höhenmetern den Wetterkreuz Speichersee erreicht. Das Baden dort ist zwar nicht erlaubt, trotzdem laden einige Bänke und Tische für eine kurze Pause ein.
 

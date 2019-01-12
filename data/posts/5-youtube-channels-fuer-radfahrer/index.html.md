@@ -7,8 +7,6 @@ tags: ["Allgemein"]
 
 Eigentlich wollte ich euch heute von meiner ersten Ausfahrt in diesem Jahr berichten. Leider streckte mich eine Kieferhöhlenentzündung unter der Woche nieder, weshalb derzeit noch Schonung angesagt ist. Den Großteil meiner letzten Woche habe ich auf der Couch daheim verbracht und vom einsetzenden Frühling geträumt. Und was hilft da nicht besser, als sich mit YouTube-Videos neue Kräfte zu holen.
 
-<!--more-->
-
 ## Trail Touch Media
 
 https://www.youtube.com/watch?v=Ck859e8hD_E
@@ -39,5 +37,3 @@ Cycling Network und dem Schwestern Kanal dem [Global Mountainbiking Network](htt
 https://www.youtube.com/watch?v=-l_CDL036d4
 
 Mark Ferguson <del>ist</del> [war](https://www.youtube.com/watch?v=pXX04YFUDK4) in seinem Brot-Beruf Vertreter für medizinische Produkte in Melbourne (Australien). Seine Passion sind aber das Radfahren und sein Youtube-Kanal. Mit mittlerweile über 30.000 Abonnenten, ist Mark der wohl bekannteste Vlogger der sich dem Thema Radfahren widmet und fast täglich Videos veröffentlicht. Neben den regelmäßigen Radtouren, widmet er sich manchmal auch [spezielleren Themen](https://www.youtube.com/watch?v=-qsLYlVWkbQ) wie vorigen Sommer, wo er täglich [Hintergrundvideos von der Tour de France](https://www.youtube.com/playlist?list=PLY2R0svohQsqr237M8L7b5IElNLb0BkZD) veröffentlichte.
-
-&nbsp;

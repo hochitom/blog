@@ -5,11 +5,9 @@ date: 2017-01-23
 tags: ["Allgemein","Herausforderungen","Rennen","Ziele","Zukunft"]
 ---
 
-Als ich 2015 meinen [ersten Mountainbike-Marathon](https://wp.hochitom.at/stattegg-marathon-bericht/) gefahren bin, habe ich mir bei der Ziel-Durchfahrt geschworen, mir nie wieder so etwas anzutun. Aber schon beim Schreiben des Berichts schmiedete ich am Ende schon wieder Pläne, bei welchen Rennen ich als nächstes antreten könnte.
+Als ich 2015 meinen [ersten Mountainbike-Marathon](/stattegg-marathon-bericht/) gefahren bin, habe ich mir bei der Ziel-Durchfahrt geschworen, mir nie wieder so etwas anzutun. Aber schon beim Schreiben des Berichts schmiedete ich am Ende schon wieder Pläne, bei welchen Rennen ich als nächstes antreten könnte.
 
 Das schöne bei Marathons ist ja, dass es nicht um Bestzeiten geht. Zumindest mir nicht. Ich mag einfach das Flair rund um das Rennen und vor allem auch die Tatsache, danach etwas stolz von einer Liste streichen zu können. Genau diese Liste - habe ich mir gedacht - werde ich jetzt veröffentlichen, um damit den Druck auf mich selbst erhöhen zu können. Dieser Blog darf absofort erst eingestampft werden, wenn die nachfolgenden Rennen alle mit einem Finisher-Foto dokumentiert wurden. So. Jetzt habt ihr mich länger am Hals ?
-
-<!--more-->
 
 ## Salzkammergut Trophy
 

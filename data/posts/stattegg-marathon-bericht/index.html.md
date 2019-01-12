@@ -27,8 +27,7 @@ Es geht los. 66km, 2.500 hm und ca. 5 Stunden am Rad stehen mir noch bevor.
 
 Ich fand recht schnell mein Tempo, überholte nach dem Start einige Fahrer und fand dann eine Gruppe, die ebenfalls in meinem Tempo Richtung erstem Anstieg auf die Leber rollten. An deren Hinterrad hängte ich mich bis zum Anstieg.
 
-[
-](https://wp.hochitom.at/14-grazer-bike-marathon-stattegg-2015/stattegg-erster-anstieg/)[![](stattegg-erster-anstieg-300x190.jpg)](https://wp.hochitom.at/14-grazer-bike-marathon-stattegg-2015/stattegg-erster-anstieg/)
+![Thomas Hochörtler fährt am Mountainbike einen schmalen Weg](assets/stattegg-erster-anstieg.jpg "Der erste Anstieg beim MTB Marathon in Stattegg")
 
 Wie ich es beim Einrollen bereits feststellte, hatte es der erste Anstieg echt in sich. Mit einer Steigung von bis zu 28% waren erstmals gute Oberschenkel gefragt. Im darauffolgenden Waldweg fuhr ich gemeinsam mit zwei anderen Bikern, überholte diese jedoch in der ersten Abfahrt und war von da an, lange Zeit alleine unterwegs.
 
@@ -46,7 +45,7 @@ Oben am Gipfel und an der letzten Labestation, rief mir ein Streckenposten die e
 
 Normalerweise fahre ich sehr gerne und sehr schnell bergab. Diesmal aber war ich noch derart entkräftet, dass ich in den flacheren Teilstücken nichteinmal treten wollte. Außerdem lies mich jede Erschütterung fluchen, denn meine Arme schmerzten schon höllisch.
 
-[![](stattegg-falschgraben-300x200.jpg)](https://wp.hochitom.at/14-grazer-bike-marathon-stattegg-2015/stattegg-falschgraben/)
+![Thomas Hochörtler fährt mit dem Mountainbike durch den Wald](assets/stattegg-falschgraben.jpg "Kurz vor dem Ziel im Falschgraben")
 
 Nach 52 Kilometern stand die letzte Quälerei am Programm. Ich selbst konnte meinen Augen fast nicht trauen. Plötzlich stand ich vor einem Waldweg, der quasi senkrecht und kerzengerade in den Wald hinauf ging. "Das kann ja nicht ihr Ernst sein", dachte ich mir. Aber es half nichts. Da musste ich durch. Nach zehn Minuten schieben, für keine 500 Meter war auch die letzte Hürde geschafft und es wartete quasi nurmehr der Falschgraben.
 
@@ -54,7 +53,7 @@ Und der hatte es auch nochmal so richtig in sich. Nach fünf Stunden am Rad und 
 
 #### 15:12 Uhr
 
-[![](stattegg-zieleinlauf-300x190.jpg)](https://wp.hochitom.at/14-grazer-bike-marathon-stattegg-2015/stattegg-zieleinlauf/)
+![Thomas Hochörtler fährt mit dem Mountainbike durchs Ziel](assets/stattegg-zieleinlauf.jpg "Der Zieleinlauf in Stattegg")
 
 Danach war es aber wirklich vorbei. Nach fünf Stunden und zwölf Minuten erreichte ich mit einem breiten Grinser das Ziel, noch dazu ohne Sturz und Defekt. Insgeheim hatte ich zwar mit einer Zeit unter fünf Stunden spekuliert, was auch bis zur Hälfte des Rennens locker möglich gewesen wäre. Durch meinen Einbruch am Schock, war mir das dann aber herzlich egal und ich freute mich, meinen ersten Marathon am Mountainbike absolviert zu haben.
 
