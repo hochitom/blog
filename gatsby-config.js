@@ -1,3 +1,7 @@
+const feedsConfig = require('./feeds-config');
+
+console.log(feedsConfig);
+
 module.exports = {
   siteMetadata: {
     title: 'hochitom.at',
@@ -93,6 +97,24 @@ module.exports = {
           },
         ],
       },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: feedsConfig
+      }
     }
   ],
 }
