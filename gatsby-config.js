@@ -1,7 +1,5 @@
 const feedsConfig = require('./feeds-config');
 
-console.log(feedsConfig);
-
 module.exports = {
   siteMetadata: {
     title: 'hochitom.at',
