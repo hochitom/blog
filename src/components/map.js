@@ -1,8 +1,9 @@
 import React from 'react'
 import fetch from 'node-fetch'
 
+const mapApiUrl = '/.netlify/functions/getGgsiesTrackData';
 const getTrackData = (fieldId) => {
-  fetch(`/.netlify/functions/getGgsiesTrackData?fieldId=${fieldId}`).then((res) => {
+  fetch( `${mapApiUrl}?fieldId=${fieldId}`).then((res) => {
     console.log(res);
     this.trackData = res;
   });
