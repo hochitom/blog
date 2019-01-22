@@ -1,4 +1,5 @@
 import React from 'react'
+import fetch from 'node-fetch'
 
 const getTrackData = (fieldId) => {
   fetch(`/.netlify/functions/getGgsiesTrackData?fieldId=${fieldId}`).then((res) => {
