@@ -4,6 +4,14 @@ import PropTypes from "prop-types"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+import rehypeReact from "rehype-react"
+import Map from "../components/map"
+
+const renderAst = new rehypeReact({
+  createElement: React.createElement,
+  components: { "map": Map },
+}).Compiler
+
 class PostTemplate extends Component {
   render() {
     const post = this.props.data.markdownRemark
@@ -12,7 +20,10 @@ class PostTemplate extends Component {
       <Layout>
         <SEO title={post.title} />
         <h1 dangerouslySetInnerHTML={{ __html: post.frontmatter.title }} />
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        {/* <div dangerouslySetInnerHTML={{ __html: post.html }} /> */}
+        {
+          renderAst(post.htmlAst)
+        }
       </Layout>
     )
   }
@@ -32,7 +43,8 @@ export const pageQuery = graphql`
         title,
         date,
       },
-      html
+      html,
+      htmlAst
     }
     site {
       siteMetadata {
