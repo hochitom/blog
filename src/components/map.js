@@ -1,19 +1,23 @@
-import React from "react"
+import React from 'react'
+
+const getTrackData = (fieldId) => {
+  fetch(`/.netlify/functions/getGgsiesTrackData?fieldId=${fieldId}`).then((res) => {
+    console.log(res);
+    this.trackData = res;
+  });
+};
 
 export default class Map extends React.Component {
-  static defaultProps = {
-    id: 0,
-  }
+  trackId = this.props.id;
 
-  state = {
-    id: this.props.id,
-  }
+  trackData = {}
 
   render() {
+    getTrackData(this.trackId);
+
     return (
       <div>
-        <h1>My GPSies Track: {this.state.id}</h1>
-        <a href={`http://www.gpsies.com/map.do?fileId=${this.state.id}`}>Tour auf gpsies.com anschauen</a>
+        <a href={`http://www.gpsies.com/map.do?fileId=${this.trackId}`}>Tour auf gpsies.com anschauen</a>
       </div>
     )
   }
