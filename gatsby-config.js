@@ -1,4 +1,5 @@
 const feedsConfig = require('./feeds-config');
+const proxy = require('http-proxy-middleware');
 
 module.exports = {
   siteMetadata: {
@@ -6,6 +7,21 @@ module.exports = {
     description: 'Thomas Hochörtler ist ein profesioneller Frontend-Developer aus Österreich. Auf seinem persönlichen Blog schreibt er über Themen die ihn interessieren.',
     author: '@hochitom',
     siteUrl: process.env.SITE_URL || `https://hochitom.at`
+  },
+  developMiddleware: app => {
+    app.use(
+      '/.netlify/functions/',
+      proxy({
+        target: 'http://localhost:9000',
+        pathRewrite: {
+          '/.netlify/functions/': '',
+        },
+      })
+    )
+  },
+  proxy: {
+    prefix: '/.netlify/functions/',
+    url: 'http://localhost:9000',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
