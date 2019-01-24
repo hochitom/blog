@@ -5,7 +5,7 @@ const cache = require('./lib/cache');
 const accessToken = "63397d5e9040aa2fc00140f5de2e39fa01f2b2cf";
 
 exports.handler = (event, context, callback) => {
-  const activityId = event.queryStringParameters.activityId;
+  const activityId = event.queryStringParameters.id;
   const trackData = cache.get(activityId);
 
   if (trackData !== false) {

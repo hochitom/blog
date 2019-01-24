@@ -10,7 +10,7 @@ const parser = new xml2js.Parser({
 });
 
 exports.handler = function(event, context, callback) {
-  const trackId = event.queryStringParameters.fieldId;
+  const trackId = event.queryStringParameters.id;
   const trackData = cache.get(trackId);
 
   if (trackData !== false) {

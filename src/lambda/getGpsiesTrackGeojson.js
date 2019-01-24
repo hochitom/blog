@@ -1,7 +1,7 @@
 var rp = require('request-promise');
 
 exports.handler = function(event, context, callback) {
-  const fieldId = event.queryStringParameters.fieldId;
+  const fieldId = event.queryStringParameters.id;
   const A = fieldId.substr(0,1);
   const B = fieldId.substr(1,1);
   const C = fieldId.substr(2,1);
