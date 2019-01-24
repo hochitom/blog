@@ -18,7 +18,7 @@ class PostTemplate extends Component {
 
     return (
       <Layout>
-        <SEO title={post.title} />
+        <SEO title={post.frontmatter.title} />
         <h1 dangerouslySetInnerHTML={{ __html: post.frontmatter.title }} />
         {/* <div dangerouslySetInnerHTML={{ __html: post.html }} /> */}
         {
