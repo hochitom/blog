@@ -7,25 +7,50 @@ const parser = new xml2js.Parser({
   explicitArray: false
 });
 
+let dumbCache = {};
+
+const addToCache = (key, data) => {
+  data.cacheHit = true;
+  dumbCache[key] = data;
+}
+
+const getFromCache = (key) => {
+  if (dumbCache[key] !== undefined) {
+    return dumbCache[key];
+  } else {
+    return false;
+  }
+}
+
+const response = (callback, data) => {
+  if (data === undefined) data = '{ response: "nothing found" }';
+  return callback(null, {
+    'statusCode': 200,
+    'headers': {
+      'Content-Type': 'application/json'
+    },
+    'body': typeof data === 'string' ? data : JSON.stringify( data )
+  });
+}
+
 exports.handler = function(event, context, callback) {
-  rp(`http://www.gpsies.com/api.do?key=${gpsiesKey}&fileId=${event.queryStringParameters.fieldId}`)
+  const trackId = event.queryStringParameters.fieldId;
+  const trackData = getFromCache(trackId);
+
+  if (trackData !== false) {
+    return response(callback, trackData);
+  }
+
+  rp(`https://www.gpsies.com/api.do?key=${gpsiesKey}&fileId=${trackId}`)
     .then((res) => {
       parser.parseString(res, (err, result) => {
         console.dir(result);
-        callback(null, {
-          'statusCode': 200,
-          'headers': {
-            'Content-Type': 'application/json'
-          },
-          'body': JSON.stringify( result.gpsies.tracks || { response: 'nothing found' } )
-        });
+        addToCache(trackId, result.gpsies.tracks);
+        return response(callback, result.gpsies.tracks);
       });
     })
     .catch((err) => {
       console.error(err);
-      callback(null, {
-        statusCode: 503,
-        body: JSON.stringify( err )
-      });
-    })
+      return response(callback, err);
+    });
 }
