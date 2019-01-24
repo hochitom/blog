@@ -25,15 +25,28 @@ export default class Map extends React.Component {
       });
   }
 
+  renderTrackData() {
+    return (
+      <div>
+        <h2>{this.state.title}</h2>
+        <dl>
+          <dt>Distanz:</dt>
+          <dd>{ (this.state.trackLengthM / 1000).toFixed(2)} km</dd>
+
+          <dt>Distanz:</dt>
+          <dd>{this.state.totalAscentM} m</dd>
+      </dl>
+      </div>
+    )
+  }
+
   render() {
     if (this.trackDataLoaded === false) {
       this.getTrackData(this.trackId);
     }
     return (
       <div>
-        <h2>{this.state.title}</h2>
-        <p>{ (this.state.trackLengthM / 1000).toFixed(2)} km</p>
-        <p>{this.state.totalAscentM} m</p>
+        { this.trackDataLoaded === true ? this.renderTrackData() : ''}
         <a href={`http://www.gpsies.com/map.do?fileId=${this.trackId}`}>Tour auf gpsies.com anschauen</a>
       </div>
     )
