@@ -22,6 +22,7 @@ const Layout = ({ children }) => (
       <>
         <Helmet>
           <link rel="alternate" type="application/rss+xml" title="hochitom.at &raquo; Feed" href="https://feeds.feedburner.com/hochitomat" />
+          <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
         <div className="wrapper">
