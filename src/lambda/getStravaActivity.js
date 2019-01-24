@@ -2,7 +2,11 @@ const rp = require('request-promise');
 const response = require('./lib/response');
 const cache = require('./lib/cache');
 
-const accessToken = "63397d5e9040aa2fc00140f5de2e39fa01f2b2cf";
+// when api responds with authorization error
+// POST https://www.strava.com/oauth/token?client_id=9587&client_secret=775dc1f20bec574b50b528f85a481c2929127ad2&code=c2cb23efa7a5b4d99fa3c1874253250e0b3ef00e&grant_type=authorization_code
+// Authorization: Bearer 8223054efe95acc5e867cd2ed2e2a6039000c7d3
+
+const accessToken = "aa65aaee584247b6e4ac9c066cc79320e96ab6e4";
 
 exports.handler = (event, context, callback) => {
   const activityId = event.queryStringParameters.id;
