@@ -23,4 +23,4 @@ Danach folgten die letzten dreißig Kilometer, wo wir ein zweites Mal eine "alte
 
 Nach 130 Kilometern spuckte uns ein schmaler Radweg plötzlich wieder in Österreich aus. Danach brauchten wir nurmehr die 20 Kilometer von Pamhagen über Wallern und Tadten nach Andau zu fahren. Nach sechs Stunden uns 37 Minuten reiner Fahrzeit und 150 Kilometern waren wir schlussendlich wieder zurück in unserm Lager.
 
-[strava activity="1125190911"]
+<map type="strava" id="1125190911"></map>

@@ -31,4 +31,4 @@ Die letzten eineinhalb Kilometer bis zum Gipfel gilt es sich dann noch einmal ha
 
 Danach ging es für uns nurmehr bergab. Zuerst zur [Rosswaldhütte](http://www.rosswaldhuette.at/de/), wo wir die nächste Pause einlegten und uns für die Heimfahrt stärkten. Dann ging es weiter zur Reiterkogelbahn. Hier trennten sich unsere Wege wieder. Ich ließ es mir nämlich nicht nehmen, die Abfahrt über die [Blue Line](https://www.bike-n-soul.at/de/bike-touren/blue-line/) zu nehmen. Der zweieinhalb Kilometer lange Trail ist einer der ältesten Trails in Saalbach. Schon bei meinem ersten Besuch vor mehr als zehn Jahren, wagte ich mich das erste Mal hinunter. Auch dieses Mal spuckte mich der Trail nach knapp sieben Minuten mit einem dicken Grinser bei der Talstation der Reiterkogelbahn aus.
 
-<map id="iaabxnmlvdooqmaz"></map>
+<map type="gpsies" id="iaabxnmlvdooqmaz"></map>
