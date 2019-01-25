@@ -1,10 +1,5 @@
-// import React from 'react'
 import fetch from 'node-fetch' // todo: fix this another way
-// import ReactMapGL from 'react-map-gl'
-// import { fromJS } from 'immutable'
-
 import React from 'react'
-// import {render} from 'react-dom';
 import MapGL from 'react-map-gl'
 import WebMercatorViewport from 'viewport-mercator-project'
 
@@ -38,7 +33,6 @@ const apiMappings = {
 export default class Map extends React.Component {
   trackId = this.props.id
   trackProvider = this.props.type
-  trackDataLoaded = false
 
   state = {
     viewport: {
@@ -71,17 +65,7 @@ export default class Map extends React.Component {
     fetch(`${mapApiUrls[provider]}?id=${trackId}`)
       .then(response => response.json())
       .then(data => {
-        this.trackDataLoaded = true
-
         const trackData = this.normalizeTrackData(data, provider)
-        if (trackData.center) {
-          // const viewport = {
-          //   latitude: trackData.center[0],
-          //   longitude: trackData.center[1],
-          //   zoom: 8,
-          // }
-          // this.setState({ viewport })
-        }
 
         this.setState({
           ...this.state,
@@ -166,8 +150,6 @@ export default class Map extends React.Component {
           })
         )
         .set('layers', defaultMapStyle.get('layers').push(trackLayer))
-
-      // TODO: fit to bounds
     }
 
     this.setState({ mapStyle })
