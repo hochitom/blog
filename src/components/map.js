@@ -1,103 +1,180 @@
-import React from 'react'
+// import React from 'react'
 import fetch from 'node-fetch' // todo: fix this another way
-import ReactMapGL from 'react-map-gl';
+// import ReactMapGL from 'react-map-gl'
+// import { fromJS } from 'immutable'
 
-const token = 'pk.eyJ1IjoiaG9jaGl0b20iLCJhIjoiY2pqeXhjdjJ4MDFpcTNxbWJqN2VsM29ybCJ9.j2ZpVbQgTetmRzXn_OUQ4w';
+import React from 'react'
+// import {render} from 'react-dom';
+import MapGL from 'react-map-gl'
+
+import { defaultMapStyle, trackLayer } from './mapStyle.js'
+import { fromJS } from 'immutable'
+
+const token =
+  'pk.eyJ1IjoiaG9jaGl0b20iLCJhIjoiY2pqeXhjdjJ4MDFpcTNxbWJqN2VsM29ybCJ9.j2ZpVbQgTetmRzXn_OUQ4w'
 
 const mapApiUrls = {
   strava: `/.netlify/functions/getStravaActivity`,
-  gpsies: `/.netlify/functions/getGpsiesTrackData`
-};
+  gpsies: `/.netlify/functions/getGpsiesTrackData`,
+}
 
 const apiMappings = {
   strava: {
     title: 'name',
     distance: 'distance',
     elevation: 'total_elevation_gain',
-    duration: 'moving_time'
+    duration: 'moving_time',
+    geoJson: 'geoJson',
+    start: 'start_latlng',
   },
   gpsies: {
     title: 'title',
     distance: 'trackLengthM',
-    elevation: 'totalAscentM'
-  }
+    elevation: 'totalAscentM',
+  },
 }
 
 export default class Map extends React.Component {
-  trackId = this.props.id;
-  trackProvider = this.props.type;
-  trackDataLoaded = false;
+  trackId = this.props.id
+  trackProvider = this.props.type
+  trackDataLoaded = false
 
   state = {
     viewport: {
-      width: 920,
-      height: 400,
-      latitude: 47.5054727,
-      longitude: 15.4491151,
-      zoom: 13
+      latitude: 37.830348, //37.830348,
+      longitude: -122.486052, //-122.486052,
+      zoom: 15,
     },
-    trackData: {}
+    mapStyle: defaultMapStyle, //'mapbox://styles/mapbox/outdoors-v10',
+    trackData: {},
   }
 
   normalizeTrackData(data, provider) {
     if (data && data.track) {
-      data = data.track;
+      data = data.track
     }
 
     let output = {
       title: data[apiMappings[provider]['title']] || undefined,
       distance: data[apiMappings[provider]['distance']] || undefined,
       elevation: data[apiMappings[provider]['elevation']] || undefined,
-      duration: data[apiMappings[provider]['duration']] || undefined
-    };
+      duration: data[apiMappings[provider]['duration']] || undefined,
+      geoJson: data[apiMappings[provider]['geoJson']] || undefined,
+      center: data[apiMappings[provider]['start']] || undefined,
+    }
 
-    return output;
+    return output
   }
 
   getTrackData(trackId, provider) {
-    fetch( `${mapApiUrls[provider]}?id=${trackId}`)
+    fetch(`${mapApiUrls[provider]}?id=${trackId}`)
       .then(response => response.json())
-      .then((data) => {
-        this.trackDataLoaded = true;
+      .then(data => {
+        this.trackDataLoaded = true
+
+        const trackData = this.normalizeTrackData(data, provider);
+        const viewport = {
+          latitude: trackData.center[0],
+          longitude: trackData.center[1],
+          zoom: 8
+        };
+
         this.setState({
           ...this.state,
-          trackData: this.normalizeTrackData(data, provider)
+          trackData,
+          viewport
         });
-      });
+
+        this._addTrack(trackData.geoJson);
+      })
   }
 
+  renderLink(provider, id) {
+    if (provider === 'strava') {
+      return (
+        <a href={`https://strava.com/activities/${id}`}>
+          Aktivität auf strava.com anschauen
+        </a>
+      )
+    } else if (provider === 'gpsies') {
+      return (
+        <a href={`https://www.gpsies.com/map.do?fileId=${id}`}>
+          Tour auf gpsies.com anschauen
+        </a>
+      )
+    }
+  }
+
+  componentDidMount() {
+    this.getTrackData(this.trackId, this.trackProvider)
+  }
+
+  _addTrack = (track) => {
+    let { mapStyle } = this.state
+    if (!mapStyle.hasIn(['sources', 'track'])) {
+      mapStyle = defaultMapStyle
+        .setIn(['sources', 'track'],
+          fromJS({
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates: track,
+              },
+            },
+          })
+        )
+        .set('layers', defaultMapStyle.get('layers').push(trackLayer))
+
+        // TODO: fit to bounds
+    }
+
+    this.setState({ mapStyle })
+  }
+
+  _onViewportChange = viewport => this.setState({ viewport })
+
   renderTrackData() {
+    const { viewport, mapStyle } = this.state
+
     return (
       <div>
         <h2>{this.state.trackData.title}</h2>
         <div>
           <dl>
             <dt>Distanz:</dt>
-            <dd>{ (this.state.trackData.distance / 1000).toFixed(2) } km</dd>
+            <dd>{(this.state.trackData.distance / 1000).toFixed(2)} km</dd>
 
             <dt>Höhenmeter:</dt>
             <dd>{this.state.trackData.elevation} m</dd>
 
             <dt>Dauer:</dt>
-            <dd>{ (this.state.trackData.duration / 60 / 60).toFixed(2) } Stunden</dd>
+            <dd>
+              {(this.state.trackData.duration / 60 / 60).toFixed(2)} Stunden
+            </dd>
           </dl>
         </div>
 
         <div>
-          {/* <ReactMapGL className="map" {...this.state.viewport} onViewportChange={(viewport) => this.setState({viewport})} mapboxApiAccessToken={token} /> */}
+          <MapGL
+            {...viewport}
+            width="100%"
+            height="400px"
+            mapStyle={mapStyle}
+            onViewportChange={this._onViewportChange}
+            mapboxApiAccessToken={token} />
         </div>
       </div>
     )
   }
 
   render() {
-    if (this.trackDataLoaded === false) {
-      this.getTrackData(this.trackId, this.trackProvider);
-    }
     return (
-      <div>
-        { this.trackDataLoaded === true ? this.renderTrackData() : ''}
-        <a href={`http://www.gpsies.com/map.do?fileId=${this.trackId}`}>Tour auf gpsies.com anschauen</a>
+      <div className="inline-map">
+        {this.trackDataLoaded === true ? this.renderTrackData() : ''}
+        {this.renderLink(this.trackProvider, this.trackId)}
       </div>
     )
   }
