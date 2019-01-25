@@ -6,6 +6,7 @@ import fetch from 'node-fetch' // todo: fix this another way
 import React from 'react'
 // import {render} from 'react-dom';
 import MapGL from 'react-map-gl'
+import WebMercatorViewport from 'viewport-mercator-project'
 
 import { defaultMapStyle, trackLayer } from './mapStyle.js'
 import { fromJS } from 'immutable'
@@ -72,21 +73,58 @@ export default class Map extends React.Component {
       .then(data => {
         this.trackDataLoaded = true
 
-        const trackData = this.normalizeTrackData(data, provider);
-        const viewport = {
-          latitude: trackData.center[0],
-          longitude: trackData.center[1],
-          zoom: 8
-        };
+        const trackData = this.normalizeTrackData(data, provider)
+        if (trackData.center) {
+          const viewport = {
+            latitude: trackData.center[0],
+            longitude: trackData.center[1],
+            zoom: 8,
+          }
+          this.setState({ viewport })
+        }
 
         this.setState({
           ...this.state,
           trackData,
-          viewport
-        });
+        })
 
-        this._addTrack(trackData.geoJson);
+        if (trackData.geoJson) {
+          this._addTrack(trackData.geoJson)
+        }
+
+        if (trackData.bounds) {
+          this._adjustBounds(trackData.bounds)
+        }
       })
+
+    if (provider === 'gpsies') {
+      fetch(`/.netlify/functions/getGpsiesTrackGeojson?id=${trackId}`)
+        .then(response => response.json())
+        .then(data => {
+          const box = data.features[0].geometry.bbox
+          const coords = data.features[0].geometry.coordinates[0]
+
+          this._addTrack(coords)
+          this._adjustBounds(box);
+        })
+    }
+  }
+
+  _adjustBounds(bounds) {
+    const viewport = new WebMercatorViewport(this.state.viewport)
+    const { longitude, latitude, zoom } = viewport.fitBounds(
+      [[bounds[2], bounds[3]], [bounds[0], bounds[1]]],
+      { padding: 40 }
+    )
+
+    this.setState({
+      viewport: {
+        ...this.state.viewport,
+        longitude,
+        latitude,
+        zoom,
+      },
+    })
   }
 
   renderLink(provider, id) {
@@ -109,11 +147,12 @@ export default class Map extends React.Component {
     this.getTrackData(this.trackId, this.trackProvider)
   }
 
-  _addTrack = (track) => {
+  _addTrack = track => {
     let { mapStyle } = this.state
     if (!mapStyle.hasIn(['sources', 'track'])) {
       mapStyle = defaultMapStyle
-        .setIn(['sources', 'track'],
+        .setIn(
+          ['sources', 'track'],
           fromJS({
             type: 'geojson',
             data: {
@@ -128,7 +167,7 @@ export default class Map extends React.Component {
         )
         .set('layers', defaultMapStyle.get('layers').push(trackLayer))
 
-        // TODO: fit to bounds
+      // TODO: fit to bounds
     }
 
     this.setState({ mapStyle })
@@ -164,7 +203,8 @@ export default class Map extends React.Component {
             height="400px"
             mapStyle={mapStyle}
             onViewportChange={this._onViewportChange}
-            mapboxApiAccessToken={token} />
+            mapboxApiAccessToken={token}
+          />
         </div>
       </div>
     )
@@ -173,7 +213,7 @@ export default class Map extends React.Component {
   render() {
     return (
       <div className="inline-map">
-        {this.trackDataLoaded === true ? this.renderTrackData() : ''}
+        {this.renderTrackData()}
         {this.renderLink(this.trackProvider, this.trackId)}
       </div>
     )

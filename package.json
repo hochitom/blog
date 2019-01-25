@@ -41,6 +41,7 @@
     "slash": "^2.0.0",
     "typography": "^0.16.18",
     "typography-theme-kirkham": "^0.16.18",
+    "viewport-mercator-project": "^6.1.0",
     "xml2js": "^0.4.19"
   },
   "keywords": [
