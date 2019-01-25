@@ -17,4 +17,4 @@ Die Strecke war wie zuvor schon erwähnt etwas anders als im vorigen Jahr, meine
 
 Nach exakt 13,02 Kilometern holte mich das Catcher-Car endlich ein und ich konnte im strömenden Regen einen Schlussstrich unter dieses Kapitel ziehen. Ich stand zwar ohne Training und Ziele am Start und konnte mein Ergebnis vom Vorjahr trotzdem um ganze vier Meter verbessern ?
 
-[strava activity="975006729"]
+<map type="strava" id="975006729"></map>

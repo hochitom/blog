@@ -18,4 +18,4 @@ Wir radelten recht flott von Neuberg über Mürzsteg und Mürzzuschlag nach Kind
 
 Nach über fünf Stunden reiner Fahrzeit, fast 130 Kilometern und nicht ganz 1.800 Höhenmetern erreichten wir, glücklich aber geschlaucht unseren Ausgangspunkt wieder.
 
-[strava activity="589717130"]
+<map type="strava" id="589717130"></map>

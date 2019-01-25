@@ -41,4 +41,4 @@ Eines war mir nämlich schon kurz nach dem Rennen bewusst: dass ich nämlich nic
 
 Mehr Bilder gibt's unter anderem [hier](http://ringattacke.com/?page_id=15539), [hier](https://www.facebook.com/pg/kathrinsphotography/photos/?tab=album&album_id=1464203910284640) und [hier](http://www.maxfunsports.com/album/2017/ring-attacke).
 
-[strava activity="1010292115"]
+<map type="strava" id="1010292115"></map>

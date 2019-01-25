@@ -69,4 +69,4 @@ Alle Bilder © [www.sportograf.de](http://www.sportograf.com/de/shop/event/2875-
 
 Mehr Bilder gibt's auf [bikeboard.at](http://bikeboard.at/Board/Bildbericht-Grazer-Bike-Marathon-Stattegg-th214508)
 
-[strava activity="370407783"]
+<map type="strava" id="370407783"></map>
