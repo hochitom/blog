@@ -26,7 +26,7 @@ const apiMappings = {
     elevation: 'total_elevation_gain',
     duration: 'moving_time',
     geoJson: 'geoJson',
-    start: 'start_latlng',
+    bounds: 'bounds',
   },
   gpsies: {
     title: 'title',
@@ -61,7 +61,7 @@ export default class Map extends React.Component {
       elevation: data[apiMappings[provider]['elevation']] || undefined,
       duration: data[apiMappings[provider]['duration']] || undefined,
       geoJson: data[apiMappings[provider]['geoJson']] || undefined,
-      center: data[apiMappings[provider]['start']] || undefined,
+      bounds: data[apiMappings[provider]['bounds']] || undefined,
     }
 
     return output
@@ -75,12 +75,12 @@ export default class Map extends React.Component {
 
         const trackData = this.normalizeTrackData(data, provider)
         if (trackData.center) {
-          const viewport = {
-            latitude: trackData.center[0],
-            longitude: trackData.center[1],
-            zoom: 8,
-          }
-          this.setState({ viewport })
+          // const viewport = {
+          //   latitude: trackData.center[0],
+          //   longitude: trackData.center[1],
+          //   zoom: 8,
+          // }
+          // this.setState({ viewport })
         }
 
         this.setState({
