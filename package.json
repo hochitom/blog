@@ -5,6 +5,7 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "@emotion/core": "^10.0.4",
+    "@mapbox/polyline": "^1.0.0",
     "bluebird": "^3.5.3",
     "emotion": "^10.0.4",
     "emotion-server": "^10.0.4",
