@@ -2,6 +2,7 @@ import fetch from 'node-fetch' // todo: fix this another way
 import React from 'react'
 import MapGL from 'react-map-gl'
 import WebMercatorViewport from 'viewport-mercator-project'
+import styled from 'styled-components'
 
 import { defaultMapStyle, trackLayer } from './mapStyle.js'
 import { fromJS } from 'immutable'
@@ -30,14 +31,50 @@ const apiMappings = {
   },
 }
 
+const InlineMap = styled.div`
+  position: relative;
+  background: #f6f6f6;
+  box-shadow: 0 0 4px rgba(0,0,0,.4), 0 0 20px rgba(0,0,0,.2);
+`;
+
+const InlineMapData = styled.div`
+  position: absolute;
+  padding: 10px;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: #fff;
+  text-shadow: 0 0 3px rgba(0,0,0,.4);
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 100%);
+  z-index: 100;
+`;
+
+const TrackTitle = styled.h2`
+  margin: 0 0 10px 0;
+  font-size: 24px;
+  font-weight: normal;
+`;
+
+const TrackData = styled.dl`
+  display: grid;
+  grid-template-columns: auto auto auto;
+`;
+
+const TrackDataItem = styled.div`
+  max-width: 150px;
+`;
+const TrackDataLabel = styled.dt``;
+const TrackDataEntry = styled.dd``;
+
 export default class Map extends React.Component {
   trackId = this.props.id
   trackProvider = this.props.type
 
   state = {
     viewport: {
-      latitude: 37.830348, //37.830348,
-      longitude: -122.486052, //-122.486052,
+      latitude: 37.830348,
+      longitude: -122.486052,
       zoom: 15,
     },
     mapStyle: defaultMapStyle, //'mapbox://styles/mapbox/outdoors-v10',
@@ -162,21 +199,26 @@ export default class Map extends React.Component {
 
     return (
       <div>
-        <h2>{this.state.trackData.title}</h2>
-        <div>
-          <dl>
-            <dt>Distanz:</dt>
-            <dd>{(this.state.trackData.distance / 1000).toFixed(2)} km</dd>
+        <InlineMapData>
+          <TrackTitle>{this.state.trackData.title}</TrackTitle>
 
-            <dt>Höhenmeter:</dt>
-            <dd>{this.state.trackData.elevation} m</dd>
+          <TrackData>
+            <TrackDataItem>
+              <TrackDataLabel>Distanz:</TrackDataLabel>
+              <TrackDataEntry>{(this.state.trackData.distance / 1000).toFixed(2)} km</TrackDataEntry>
+            </TrackDataItem>
 
-            <dt>Dauer:</dt>
-            <dd>
-              {(this.state.trackData.duration / 60 / 60).toFixed(2)} Stunden
-            </dd>
-          </dl>
-        </div>
+            <TrackDataItem>
+              <TrackDataLabel>Höhenmeter:</TrackDataLabel>
+              <TrackDataEntry>{this.state.trackData.elevation} m</TrackDataEntry>
+            </TrackDataItem>
+
+            <TrackDataItem>
+              <TrackDataLabel>Dauer:</TrackDataLabel>
+              <TrackDataEntry>{(this.state.trackData.duration / 60 / 60).toFixed(2)} Stunden</TrackDataEntry>
+            </TrackDataItem>
+          </TrackData>
+        </InlineMapData>
 
         <div>
           <MapGL
@@ -194,10 +236,10 @@ export default class Map extends React.Component {
 
   render() {
     return (
-      <div className="inline-map">
+      <InlineMap>
         {this.renderTrackData()}
-        {this.renderLink(this.trackProvider, this.trackId)}
-      </div>
+        {/* {this.renderLink(this.trackProvider, this.trackId)} */}
+      </InlineMap>
     )
   }
 }
