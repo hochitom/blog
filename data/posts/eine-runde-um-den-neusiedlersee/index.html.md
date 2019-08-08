@@ -21,6 +21,6 @@ Nach knapp 120 Kilometern legten wir dann eine letzte Pause ein. In Fertőszépl
 
 Danach folgten die letzten dreißig Kilometer, wo wir ein zweites Mal eine "alternative Route" wählten. Denn anstatt die direkte Straße zum Grenzübergang in Pamhagen zu nehmen, folgten wir weiter dem E13. Obwohl wir diesmal wieder einen Umweg von gut sieben Kilometern einlegten, waren wir doch ein wenig froh darüber, denn so konnten wir nochmals ein paar Blicke auf den Neusiedlersee werfen. Außerdem war diese Straße so abgeschieden, dass wir auf 15 Kilometern lediglich auf zwei Autos trafen.
 
-Nach 130 Kilometern spuckte uns ein schmaler Radweg plötzlich wieder in Österreich aus. Danach brauchten wir nurmehr die 20 Kilometer von Pamhagen über Wallern und Tadten nach Andau zu fahren. Nach sechs Stunden uns 37 Minuten reiner Fahrzeit und 150 Kilometern waren wir schlussendlich wieder zurück in unserm Lager.
+Nach 130 Kilometern spuckte uns ein schmaler Radweg plötzlich wieder in Österreich aus. Danach brauchten wir nurmehr die 20 Kilometer von Pamhagen über Wallern und Tadten nach Andau zu fahren. Nach sechs Stunden und 37 Minuten reiner Fahrzeit und 150 Kilometern waren wir schlussendlich wieder zurück in unserm Lager.
 
 <map type="strava" id="1125190911"></map>
