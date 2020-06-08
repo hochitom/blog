@@ -1,15 +1,15 @@
 {
-  "title": "Your Blog Name",
-  "url": "https://myurl.com/",
-  "description": "I am writing about my experiences as a naval navel-gazer.",
+  "title": "hochitom.at",
+  "url": "https://hochitom.at/",
+  "description": "Hi, ich bin Thomas und komme aus Österreich. Das hier ist mein persönlicher Blog auf dem ich übers Radfahren schreibe.",
   "feed": {
-    "subtitle": "I am writing about my experiences as a naval navel-gazer.",
+    "subtitle": "Hi, ich bin Thomas und komme aus Österreich. Das hier ist mein persönlicher Blog auf dem ich übers Radfahren schreibe.",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://myurl.com/"
+    "id": "https://hochitom.at/"
   },
   "author": {
-    "name": "Your Name Here",
-    "email": "youremailaddress@example.com"
+    "name": "Thomas Hochörtler",
+    "email": "hi@hochitom.at"
   }
 }
