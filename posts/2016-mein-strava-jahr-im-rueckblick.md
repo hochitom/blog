@@ -2,10 +2,12 @@
 layout: post
 title: 2016. Mein STRAVA Jahr im Rückblick
 date: 2017-01-09
-tags: ["Allgemein", "Auswertung", "Daten", "Highlights", "Video", "Strava"]
+tags: ['Allgemein', 'Auswertung', 'Daten', 'Highlights', 'Video', 'Strava']
 ---
 
-[video width="1280" height="720" mp4="https://wp.hochitom.at/wp-content/uploads/8952554.mp4"][/video]
+<video width="1280" height="720" controls>
+  <source src="/img/8952554.mp4" type="video/mp4">
+</video>
 
 Zum Jahreswechsel schießen sie aus dem Boden, wie die Schwammerl im Sommer. Die Jahresrückblicke. Jedes [coole](https://www.swarmapp.com/user/3240433/year-in-review?s=OrqTNcdDZ5pGOZKJHDdjFBecemU) [Netzwerk](http://www.last.fm/de/user/hochitom/listening-report/year) hat seine eigenen. Auch Strava hat mir meine Jahrestatistik in Form eines [Videos](https://wp.hochitom.at/?attachment_id=98) geschickt. Außerdem gab es noch diese [inoffizielle Jahresauswertung](http://www.marcellobrivio.com/projects/strava-toolbox/public.php?content=ytd_report&athlete=8952554) meiner Fahrrad-Ausfahrten.
 
@@ -39,16 +41,16 @@ Worauf ich auch sehr neugierig war, waren die Bestwerte der verschiedensten Date
 
 Und zum Abschluss hab ich noch ein paar Bilder
 
-![Sonnenuntergang in Mürzhofen](/img/475859406_nice_evening_run__6B6DDE56-CD0A-4CB0-8210-F74DE7CB946E.jpg "22. Jänner, Nice evening run")
+![Sonnenuntergang in Mürzhofen](/img/475859406_nice_evening_run__6B6DDE56-CD0A-4CB0-8210-F74DE7CB946E.jpg '22. Jänner, Nice evening run')
 
-![](/img/599688989_stanglalm__von_mitterdorf__2B7087B7-7D91-414C-8CED-4B79AA941C1B.jpg "4. Juni, Stanglalm (von Mitterdorf)")
+![](/img/599688989_stanglalm__von_mitterdorf__2B7087B7-7D91-414C-8CED-4B79AA941C1B.jpg '4. Juni, Stanglalm (von Mitterdorf)')
 
-![](/img/675973910_exploring_puerto_de_la_cruz_577440B1-5A8E-4097-BE9D-AB21C0A03017.jpg "14. August, Exploring Puerto de la Cruz")
+![](/img/675973910_exploring_puerto_de_la_cruz_577440B1-5A8E-4097-BE9D-AB21C0A03017.jpg '14. August, Exploring Puerto de la Cruz')
 
-![](/img/691984608_s_lsnitz__heidegger___jasnitz____inkl__schlauch_wechseln_B5A717EE-2DB3-4904-8468-35539BC52703.jpg "28. August, Sölsnitz- Heidegger - Jasnitz // inkl. Schlauch wechseln")
+![](/img/691984608_s_lsnitz__heidegger___jasnitz____inkl__schlauch_wechseln_B5A717EE-2DB3-4904-8468-35539BC52703.jpg '28. August, Sölsnitz- Heidegger - Jasnitz // inkl. Schlauch wechseln')
 
-![](/img/715256921_m_rzgraben___t_llamoar___doppler_____gatschig__491B22DF-DD6F-4C08-9CD0-1C8E80B11686.jpg "17. September, Mürzgraben - Töllamoar - Doppler // gatschig")
+![](/img/715256921_m_rzgraben___t_llamoar___doppler_____gatschig__491B22DF-DD6F-4C08-9CD0-1C8E80B11686.jpg '17. September, Mürzgraben - Töllamoar - Doppler // gatschig')
 
-![](/img/729964632_mugl____afterwork_tour_3F06F0C8-3ED7-4730-A833-CA8BC6FD21F4.jpg "30. September, Mugl // afterwork Tour")
+![](/img/729964632_mugl____afterwork_tour_3F06F0C8-3ED7-4730-A833-CA8BC6FD21F4.jpg '30. September, Mugl // afterwork Tour')
 
-![Adventkranz vor dem Mountainbike](/img/787179929_sch_nen_1__advent_A28C97F3-D1DB-4017-9E1F-BED8C8863B16.jpg "27. November, Schönen 1. Advent")
+![Adventkranz vor dem Mountainbike](/img/787179929_sch_nen_1__advent_A28C97F3-D1DB-4017-9E1F-BED8C8863B16.jpg '27. November, Schönen 1. Advent')
