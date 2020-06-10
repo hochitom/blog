@@ -1,0 +1,16 @@
+---
+pagination:
+  data: collections.videos
+  size: 1
+  alias: video
+  addAllPagesToCollections: true
+layout: layouts/home.njk
+renderData:
+  title: "{{ video.title }}"
+permalink: /videos/{{ video.id }}/
+---
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{ video.id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><a href="{{ video.link }}">Video auf YouTube anschauen</a></p>
+<h1>{{ video.title }}</h1>
+<p>{{ video.description }}</p>

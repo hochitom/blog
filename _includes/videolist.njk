@@ -1,7 +1,7 @@
 <ol reversed class="postlist">
 {% for video in videolist | reverse %}
   <li class="postlist-item{% if video.link == link %} postlist-item-active{% endif %}">
-    <a href="{{ video.link | url }}" class="postlist-link">{% if video.title %}{{ video.title }}{% else %}<code>{{ video.link }}</code>{% endif %}</a>
+    <a href="{{ video.id | url }}" class="postlist-link">{% if video.title %}{{ video.title }}{% else %}<code>{{ video.link }}</code>{% endif %}</a>
     <time class="postlist-date" datetime="{{ video.published | htmlDateString }}">{{ video.published | readableDate }}</time>
   </li>
 {% endfor %}
