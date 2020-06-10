@@ -1,0 +1,12 @@
+---
+layout: layouts/home.njk
+permalink: /videos/
+eleventyNavigation:
+  key: Videos
+  order: 4
+---
+
+<h1>Videos</h1>
+
+{% set videolist = collections.videos %}
+{% include "videolist.njk" %}
