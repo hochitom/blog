@@ -4,7 +4,7 @@ title: Über mich
 templateClass: tmpl-post
 eleventyNavigation:
   key: Über mich
-  order: 3
+  order: 2
 ---
 
 Hallo, ich bin Thomas, 28 Jahre und komme aus der Steiermark. Das hier ist mein privater Blog in dem ich hauptsächlich über Mountainbiken und andere Sport-Themen schreibe.
