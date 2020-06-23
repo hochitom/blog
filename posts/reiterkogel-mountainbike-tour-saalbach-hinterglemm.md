@@ -21,7 +21,7 @@ Am Sonntag war das Wetter dann endlich so wie man es sich vorstellt, oder so. Zu
 
 Nach einer frischen Buttermilch ging es weiter Richtung Reiterkogel. Dafür mussten wir zuerst wieder ein paar Meter hinunter fahren. Ich nahm dafür den [Höllentrail](https://www.saalbach.com/de/tour/H%C3%B6llen%20Trail%20an%20der%20Kohlmaisgipfelbahn%20in%20Saalbach%20Hinterglemm_9801710), der direkt beim Spielberhaus startet und einem nach rund einer Minute Fahrzeit wieder ausspuckt. Dafür muss man aber ein paar Höhenmeter mehr zum Reiterkogel in Kauf nehmen. Was angesichts des Spaßfaktors der Trails durchaus in Kauf genommen werden sollte!
 
-![Bei der Auffahrt zum Reiterkogel](/img//img_2004.jpg 'Bei der Auffahrt zum Reiterkogel')
+![Bei der Auffahrt zum Reiterkogel](/img/img_2004.jpg 'Bei der Auffahrt zum Reiterkogel')
 
 Die Auffahrt zum Reiterkogel beginnt recht entspannt. Vom Spielberhaus kommt man zuerst an der Bergstation der Bärnkogel-Bahn vorbei, ehe man nach viereinhalb Kilometern und rund 400 Höhenmetern den Wetterkreuz Speichersee erreicht. Das Baden dort ist zwar nicht erlaubt, trotzdem laden einige Bänke und Tische für eine kurze Pause ein.
 
