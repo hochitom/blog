@@ -4,7 +4,7 @@ title: Bikes
 templateClass: tmpl-post
 eleventyNavigation:
   key: Bikes
-  order: 4
+  order: 5
 ---
 
 ![](/img/hugene.jpeg)
