@@ -33,23 +33,25 @@ const parseFeedAndNormalizeData = function (feedAsString) {
       }
 
       if (result && result.feed && result.feed.entry) {
-        const normalizedData = result.feed.entry.map((item) => {
-          const media = item['media:group'][0]
-          return {
-            id: item['yt:videoId'][0],
-            channelId: item['yt:channelId'][0],
-            title: item.title[0],
-            link: item.link[0]['$']['href'],
-            author: item.author[0]['name'][0],
-            profileLink: item.author[0]['uri'][0],
-            published: item.published[0],
-            updated: item.updated[0],
-            description: media['media:description'][0],
-            content: media['media:content'][0]['$'],
-            thumbnail: media['media:thumbnail'][0]['$'],
-            media: media,
-          }
-        })
+        const normalizedData = result.feed.entry
+          .map((item) => {
+            const media = item['media:group'][0]
+            return {
+              id: item['yt:videoId'][0],
+              channelId: item['yt:channelId'][0],
+              title: item.title[0],
+              link: item.link[0]['$']['href'],
+              author: item.author[0]['name'][0],
+              profileLink: item.author[0]['uri'][0],
+              published: new Date(item.published[0]),
+              updated: new Date(item.updated[0]),
+              description: media['media:description'][0],
+              content: media['media:content'][0]['$'],
+              thumbnail: media['media:thumbnail'][0]['$'],
+              media: media,
+            }
+          })
+          .sort((a, b) => a.created > b.created)
         return resolve(normalizedData)
       }
 
