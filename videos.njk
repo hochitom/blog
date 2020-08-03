@@ -9,4 +9,5 @@ eleventyNavigation:
 <h1>Videos</h1>
 
 {% set videolist = collections.videos %}
+{% set videolistCounter = collections.videos | length %}
 {% include "videolist.njk" %}

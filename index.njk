@@ -15,7 +15,7 @@ eleventyNavigation:
 
 <h2>Aktuelle Videos</h2>
 
-{% set videolist = collections.videos | head(-3) %}
+{% set videolist = collections.videos | head(3) %}
 {% set videolistCounter = collections.videos | length %}
 {% include "videolist.njk" %}
 <p>Mehr Videos gibts <a href="{{ '/videos/' | url }}">hier</a>.</p>
