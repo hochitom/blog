@@ -1,40 +1,40 @@
 const http = require('https')
 const parseString = require('xml2js').parseString
 
-const fetchFeed = function () {
+const fetchFeed = function() {
   return new Promise((resolve, reject) => {
     http
       .get(
         'https://www.youtube.com/feeds/videos.xml?channel_id=UCxpmQStO4F1ycGde21DXolg'
       )
-      .on('response', function (response) {
+      .on('response', function(response) {
         let string = ''
 
-        response.on('data', function (chunk) {
+        response.on('data', function(chunk) {
           string += chunk
         })
 
-        response.on('end', function () {
+        response.on('end', function() {
           resolve(string)
         })
 
-        response.on('error', function () {
+        response.on('error', function() {
           reject()
         })
       })
   })
 }
 
-const parseFeedAndNormalizeData = function (feedAsString) {
+const parseFeedAndNormalizeData = function(feedAsString) {
   return new Promise((resolve, reject) => {
-    parseString(feedAsString, function (err, result) {
+    parseString(feedAsString, function(err, result) {
       if (err) {
         return reject()
       }
 
       if (result && result.feed && result.feed.entry) {
         const normalizedData = result.feed.entry
-          .map((item) => {
+          .map(item => {
             const media = item['media:group'][0]
             return {
               id: item['yt:videoId'][0],
@@ -51,7 +51,7 @@ const parseFeedAndNormalizeData = function (feedAsString) {
               media: media,
             }
           })
-          .sort((a, b) => a.created > b.created)
+          .sort((a, b) => a.published > b.published)
         return resolve(normalizedData)
       }
 
@@ -60,7 +60,7 @@ const parseFeedAndNormalizeData = function (feedAsString) {
   })
 }
 
-module.exports = async function () {
+module.exports = async function() {
   const feed = await fetchFeed()
   const videos = await parseFeedAndNormalizeData(feed)
   return videos
