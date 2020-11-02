@@ -34,7 +34,7 @@ module.exports = function (eleventyConfig) {
   })
 
   eleventyConfig.addCollection('tagList', require('./_11ty/getTagList'))
-  eleventyConfig.addCollection('videos', require('./_11ty/videos'))
+  eleventyConfig.addCollection('videos', require('./_11ty/videos-v2'))
 
   eleventyConfig.addPassthroughCopy('img')
   eleventyConfig.addPassthroughCopy('css')
