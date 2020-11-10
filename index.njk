@@ -5,17 +5,50 @@ eleventyNavigation:
   order: 1
 ---
 
-<h2>Aktuelle Blogartikel</h2>
+<div class="relative py-16 bg-white overflow-hidden">
+    <div class="relative px-4 sm:px-6 lg:px-8">
+        <div class="text-lg max-w-prose mx-auto mb-6">
+            <h1 class="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">Aktuelle Blogartikel</h1>
+        </div>
+        <div class="prose prose-lg text-gray-500 mx-auto">
+            {% set postslist = collections.posts | head(-5) %}
+            {% set postslistCounter = collections.posts | length %}
+            {% include "postslist.njk" %}
+            <p>Mehr Artikel gibts im <a href="{{ '/posts/' | url }}">Archiv</a>.</p>
+        </div>
+    </div>
+</div>
 
-{% set postslist = collections.posts | head(-3) %}
-{% set postslistCounter = collections.posts | length %}
-{% include "postslist.njk" %}
+<div class="bg-white">
+  <div class="mx-auto py-12 px-4 max-w-screen-xl sm:px-6 lg:px-8 lg:py-24">
+    <div class="space-y-12">
+      <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
+        <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Aktuelle Videos</h2>
+      </div>
 
-<p>Mehr Artikel gibts im <a href="{{ '/posts/' | url }}">Archiv</a>.</p>
+        {% set videolist = collections.videos | head(4) %}
+        {% set videolistCounter = collections.videos | length %}
+        <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-4 lg:gap-x-8">
+        {% for video in videolist %}
+          <li>
+            <a href="/videos/{{ video.id | url }}">
+              <div class="space-y-4">
+                  <div class="relative pb-2/3">
+                    <img class="absolute object-cover h-full w-full shadow-lg rounded-lg" src="{{ video.thumbnail.medium.url }}" alt="">
+                  </div>
 
-<h2>Aktuelle Videos</h2>
-
-{% set videolist = collections.videos | head(3) %}
-{% set videolistCounter = collections.videos | length %}
-{% include "videolist.njk" %}
-<p>Mehr Videos gibts <a href="{{ '/videos/' | url }}">hier</a>.</p>
+                  <div class="space-y-2">
+                    <div class="text-lg leading-6 font-medium space-y-1">
+                      <h4>{{ video.title }}</h4>
+                      <time class="text-indigo-600" datetime="{{ video.published | htmlDateString }}">{{ video.published | readableDate }}</time>
+                    </div>
+                  </div>
+              </div>
+            </a>
+          </li>
+        {% endfor %}
+        </ul>
+      </ul>
+    </div>
+  </div>
+</div>
