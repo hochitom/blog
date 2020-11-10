@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +7,10 @@
     <meta name="Description" content="{{ renderData.description or description or metadata.description }}">
     <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
     <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
-    <script>
-    if (navigator && navigator.serviceWorker) {
-      navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        if (registrations && registrations.length > 0) {
-          for(let registration of registrations) {
-            registration.unregister()
-          }
-          window.location.reload();
-        }
-      });
-    }
-    </script>
+    <script src="{{ '/sw.js' | url }}"></script>
   </head>
-  <body>
 
+  <body>
     <div class="relative bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
@@ -39,7 +28,6 @@
           </div>
 
           <nav class="hidden md:flex space-x-10">
-            <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
             {%- for entry in collections.all | eleventyNavigation %}
               <a href="{{ entry.url | url }}" class="text-base leading-6 hover:text-gray-900 focus:outline-none focus:text-gray-900 transition ease-in-out duration-150 {% if entry.url == page.url %}text-gray-900 font-bold{% else %}text-gray-500 font-medium{% endif %}">
                 {{ entry.title }}
@@ -98,6 +86,5 @@
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src='https://statistik.hochoertler.at/js/container_ZcEZI2vE.js'; s.parentNode.insertBefore(g,s);
     </script>
-    <!-- Current page: {{ page.url | url }} -->
   </body>
 </html>

@@ -6,7 +6,7 @@ const pluginNavigation = require('@11ty/eleventy-navigation')
 const markdownIt = require('markdown-it')
 const markdownItAnchor = require('markdown-it-anchor')
 
-module.exports = function (eleventyConfig) {
+module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss)
   eleventyConfig.addPlugin(pluginSyntaxHighlight)
   eleventyConfig.addPlugin(pluginNavigation)
@@ -15,12 +15,12 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addLayoutAlias('post', 'layouts/post.njk')
 
-  eleventyConfig.addFilter('readableDate', (dateObj) => {
+  eleventyConfig.addFilter('readableDate', dateObj => {
     return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('dd LLL yyyy')
   })
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-  eleventyConfig.addFilter('htmlDateString', (dateObj) => {
+  eleventyConfig.addFilter('htmlDateString', dateObj => {
     return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('yyyy-LL-dd')
   })
 
@@ -38,6 +38,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy('img')
   eleventyConfig.addPassthroughCopy('css')
+  eleventyConfig.addPassthroughCopy('./sw.js')
 
   /* Markdown Overrides */
   let markdownLibrary = markdownIt({
@@ -54,7 +55,7 @@ module.exports = function (eleventyConfig) {
   // Browsersync Overrides
   eleventyConfig.setBrowserSyncConfig({
     callbacks: {
-      ready: function (err, browserSync) {
+      ready: function(err, browserSync) {
         const content_404 = fs.readFileSync('_site/404.html')
 
         browserSync.addMiddleware('*', (req, res) => {
