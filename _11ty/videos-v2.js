@@ -1,41 +1,45 @@
 const http = require('https')
 // const parseString = require('xml2js').parseString
 
-const fetchFeed = function () {
+const fetchFeed = function() {
   console.log('fetchFeed')
   return new Promise((resolve, reject) => {
     http
       .get(
         'https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCxpmQStO4F1ycGde21DXolg&maxResults=50&key=AIzaSyD_TpAOELAzJP-2cRSkSU5qOItsb8ETrpc'
       )
-      .on('response', function (response) {
+      .on('response', function(response) {
         let string = ''
 
-        response.on('data', function (chunk) {
+        response.on('data', function(chunk) {
           string += chunk
         })
 
-        response.on('end', function () {
+        response.on('end', function() {
           resolve(string)
         })
 
-        response.on('error', function () {
+        response.on('error', function() {
           reject()
         })
       })
   })
 }
 
-const parseFeedAndNormalizeData = function (feedAsString) {
+const parseFeedAndNormalizeData = function(feedAsString) {
   const feed = JSON.parse(feedAsString)
 
+  if (!feed || !feed.items) {
+    return []
+  }
+
   return feed.items
-    .filter((r) => r.id.kind === 'youtube#video')
+    .filter(r => r && r.id && r.id.kind === 'youtube#video')
     .sort(
       (a, b) =>
         new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt)
     )
-    .map((item) => {
+    .map(item => {
       return {
         id: item.id.videoId,
         channelId: item.snippet.channelId,
@@ -76,12 +80,12 @@ const parseFeedAndNormalizeData = function (feedAsString) {
   //   }
 }
 
-const t = async function () {
+const t = async function() {
   const feed = await fetchFeed()
   const videos = parseFeedAndNormalizeData(feed)
   return videos
 }
 
-t()
+// t()
 
 module.exports = t
