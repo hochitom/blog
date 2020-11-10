@@ -1,8 +1,20 @@
-<ol reversed class="postlist" style="counter-reset: start-from {{ (videolistCounter or videolist.length) + 1 }}">
+<ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-4 lg:gap-x-8">
 {% for video in videolist %}
-  <li class="postlist-item{% if video.link == link %} postlist-item-active{% endif %}">
-    <a href="/videos/{{ video.id | url }}" class="postlist-link">{% if video.title %}{{ video.title }}{% else %}<code>{{ video.link }}</code>{% endif %}</a>
-    <time class="postlist-date" datetime="{{ video.published | htmlDateString }}">{{ video.published | readableDate }}</time>
+  <li>
+    <a href="/videos/{{ video.id | url }}">
+      <div class="space-y-4">
+          <div class="relative pb-2/3">
+            <img class="absolute object-cover h-full w-full shadow-lg rounded-lg" src="{{ video.thumbnail.medium.url }}" alt="">
+          </div>
+
+          <div class="space-y-2">
+            <div class="text-lg leading-6 font-medium space-y-1">
+              <h4>{{ video.title }}</h4>
+              <time class="text-indigo-600" datetime="{{ video.published | htmlDateString }}">{{ video.published | readableDate }}</time>
+            </div>
+          </div>
+      </div>
+    </a>
   </li>
 {% endfor %}
-</ol>
+</ul>

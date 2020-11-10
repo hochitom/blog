@@ -26,29 +26,10 @@ eleventyNavigation:
         <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Aktuelle Videos</h2>
       </div>
 
-        {% set videolist = collections.videos | head(4) %}
-        {% set videolistCounter = collections.videos | length %}
-        <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-4 lg:gap-x-8">
-        {% for video in videolist %}
-          <li>
-            <a href="/videos/{{ video.id | url }}">
-              <div class="space-y-4">
-                  <div class="relative pb-2/3">
-                    <img class="absolute object-cover h-full w-full shadow-lg rounded-lg" src="{{ video.thumbnail.medium.url }}" alt="">
-                  </div>
-
-                  <div class="space-y-2">
-                    <div class="text-lg leading-6 font-medium space-y-1">
-                      <h4>{{ video.title }}</h4>
-                      <time class="text-indigo-600" datetime="{{ video.published | htmlDateString }}">{{ video.published | readableDate }}</time>
-                    </div>
-                  </div>
-              </div>
-            </a>
-          </li>
-        {% endfor %}
-        </ul>
-      </ul>
+      {% set videolist = collections.videos | head(4) %}
+      {% set videolistCounter = collections.videos | length %}
+      {% include "videolist.njk" %}
     </div>
   </div>
 </div>
+
