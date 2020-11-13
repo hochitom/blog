@@ -10,7 +10,17 @@ renderData:
 permalink: /videos/{{ video.permalink }}/
 ---
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{ video.id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<p><a href="{{ video.link }}">Video auf YouTube anschauen</a></p>
-<h1>{{ video.title }}</h1>
-<p>{{ video.description }}</p>
+<div class="relative py-16 bg-white overflow-hidden">
+    <div class="relative px-4 sm:px-6 lg:px-8">
+        <div class="relative mx-auto mb-6" style="padding-bottom: 56%">
+            <iframe class="w-full absolute" style="height: 100%" src="https://www.youtube-nocookie.com/embed/{{ video.id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="text-lg max-w-prose mx-auto mb-6">
+            <h1 class="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">{{ video.title }}</h1>
+        </div>
+        <div class="prose prose-lg text-gray-500 mx-auto">
+            <p>{{ video.description }}</p>
+            <p><a href="{{ video.link }}">Video auf YouTube anschauen</a></p>
+        </div>
+    </div>
+</div>
