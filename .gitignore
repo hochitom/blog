@@ -3,3 +3,4 @@ node_modules/
 css/style.css
 package-lock.json
 mix-manifest.json
+.env

@@ -1,7 +1,7 @@
 <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-4 lg:gap-x-8">
 {% for video in videolist %}
   <li>
-    <a href="/videos/{{ video.id | url }}">
+    <a href="/videos/{{ video.permalink | url }}">
       <div class="space-y-4">
           <div class="relative pb-2/3">
             <img class="absolute object-cover h-full w-full shadow-lg rounded-lg" src="{{ video.thumbnail.medium.url }}" alt="">

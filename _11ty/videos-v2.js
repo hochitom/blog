@@ -1,39 +1,90 @@
 const http = require('https')
-// const parseString = require('xml2js').parseString
+const slugify = require('slugify')
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
 
-const fetchFeed = function() {
-  console.log('fetchFeed')
-  return new Promise((resolve, reject) => {
-    http
-      .get(
-        'https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCxpmQStO4F1ycGde21DXolg&maxResults=50&key=AIzaSyD_TpAOELAzJP-2cRSkSU5qOItsb8ETrpc'
-      )
-      .on('response', function(response) {
-        let string = ''
+dotenv.config()
 
-        response.on('data', function(chunk) {
-          string += chunk
-        })
+const youtubeKey = process.env.youtube_api || ''
+const mongoUser = process.env.mongo_user || ''
+const mongoPw = process.env.mongo_pw || ''
 
-        response.on('end', function() {
-          resolve(string)
-        })
+slugify.extend({ '|': '' })
+slugify.extend({ ü: 'ue' })
+slugify.extend({ ö: 'oe' })
+slugify.extend({ ä: 'ae' })
+slugify.extend({ ß: 'ss' })
 
-        response.on('error', function() {
-          reject()
-        })
-      })
+const youtubeUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCxpmQStO4F1ycGde21DXolg&maxResults=100&key=${youtubeKey}`
+const mongoUrl = `mongodb+srv://${mongoUser}:${mongoPw}@main.aiphv.mongodb.net/blog?retryWrites=true&w=majority`
+
+const Schema = mongoose.Schema
+
+const Permalink = new Schema({
+  yid: { type: String, index: true },
+  permalink: String,
+  createdAt: { type: Date, default: Date.now },
+})
+
+const connectDb = async () => {
+  return mongoose.connect(mongoUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
   })
 }
 
-const parseFeedAndNormalizeData = function(feedAsString) {
-  const feed = JSON.parse(feedAsString)
+const fetchFeed = function() {
+  return new Promise((resolve, reject) => {
+    http.get(youtubeUrl).on('response', function(response) {
+      let string = ''
 
-  if (!feed || !feed.items) {
-    return []
+      response.on('data', function(chunk) {
+        string += chunk
+      })
+
+      response.on('end', function() {
+        resolve(string)
+      })
+
+      response.on('error', function() {
+        reject()
+      })
+    })
+  })
+}
+
+const createPermalink = string => {
+  return slugify(string.split('|')[0], {
+    strict: true,
+    lower: true,
+  })
+}
+
+const getPermalinkFromDb = (model, id) => {
+  return model.findOne({ yid: id })
+}
+
+const saverPermalinkToDb = async (model, id, permalink) => {
+  return model.create({ yid: id, permalink })
+}
+
+const getPermalink = async (id, title, model) => {
+  const permalink = await getPermalinkFromDb(model, id)
+
+  if (permalink) {
+    return permalink.permalink
   }
 
-  return feed.items
+  const newPermalink = createPermalink(title)
+  await saverPermalinkToDb(model, id, newPermalink)
+
+  return newPermalink
+}
+
+const getSortedVideos = items => {
+  return items
     .filter(r => r && r.id && r.id.kind === 'youtube#video')
     .sort(
       (a, b) =>
@@ -49,40 +100,32 @@ const parseFeedAndNormalizeData = function(feedAsString) {
         description: item.snippet.description,
         thumbnail: item.snippet.thumbnails,
       }
-      //           author: item.author[0]['name'][0],
-      //           profileLink: item.author[0]['uri'][0],
-      //           updated: new Date(item.updated[0]),
-      //           content: media['media:content'][0]['$'],
-      //           media: media,
     })
-
-  //   if (result && result.feed && result.feed.entry) {
-  //     const normalizedData = result.feed.entry
-  //       .map((item) => {
-  //         const media = item['media:group'][0]
-  //         return {
-  //           id: item['yt:videoId'][0],
-  //           channelId: item['yt:channelId'][0],
-  //           title: item.title[0],
-  //           link: item.link[0]['$']['href'],
-  //           author: item.author[0]['name'][0],
-  //           profileLink: item.author[0]['uri'][0],
-  //           published: new Date(item.published[0]),
-  //           updated: new Date(item.updated[0]),
-  //           description: media['media:description'][0],
-  //           content: media['media:content'][0]['$'],
-  //           thumbnail: media['media:thumbnail'][0]['$'],
-  //           media: media,
-  //         }
-  //       })
-  //       .sort((a, b) => a.published > b.published)
-  //     return resolve(normalizedData)
-  //   }
 }
 
-const t = async function() {
+const parseFeedAndNormalizeData = async (feedAsString, model) => {
+  const feed = JSON.parse(feedAsString)
+
+  if (!feed || !feed.items) {
+    return []
+  }
+
+  const videos = getSortedVideos(feed.items)
+
+  for (let i = 0; i < videos.length; i++) {
+    const permalink = await getPermalink(videos[i].id, videos[i].title, model)
+    videos[i].permalink = permalink
+  }
+
+  return videos
+}
+
+const t = async () => {
+  const db = await connectDb()
+  const MyModel = db.model('Permalink', Permalink)
   const feed = await fetchFeed()
-  const videos = parseFeedAndNormalizeData(feed)
+  const videos = await parseFeedAndNormalizeData(feed, MyModel)
+  mongoose.connection.close()
   return videos
 }
 
