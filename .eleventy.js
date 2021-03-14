@@ -16,17 +16,17 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addLayoutAlias('post', 'layouts/post.njk')
 
   eleventyConfig.addFilter('readableDate', dateObj => {
-    return DateTime.fromJSDate(dateObj, {
-      zone: 'Europe/Vienna',
-      locale: 'de',
-    }).toFormat('dd. LLLL yyyy')
+    return DateTime.fromJSDate(dateObj)
+      .setZone('Europe/Vienna')
+      .setLocale('de')
+      .toFormat('dd. LLLL yyyy')
   })
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter('htmlDateString', dateObj => {
-    return DateTime.fromJSDate(dateObj, { zone: 'Europe/Vienna' }).toFormat(
-      'yyyy-LL-dd'
-    )
+    return DateTime.fromJSDate(dateObj)
+      .setZone('Europe/Vienna')
+      .toFormat('yyyy-LL-dd')
   })
 
   // Get the first `n` elements of a collection.
