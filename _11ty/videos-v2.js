@@ -99,6 +99,10 @@ const getSortedVideos = items => {
         published: new Date(item.snippet.publishedAt),
         description: item.snippet.description,
         thumbnail: item.snippet.thumbnails,
+        upcoming:
+          item &&
+          item.snippet &&
+          item.snippet.liveBroadcastContent === 'upcoming',
       }
     })
 }
