@@ -108,24 +108,23 @@ const getPermalink = async (id, title, model) => {
   return newPermalink
 }
 
-const getSortedVideos = async items => {
+const getSortedVideos = items => {
   return items
     .filter(r => r && r.id && r.id.kind === 'youtube#video')
     .sort(
       (a, b) =>
         new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt)
     )
-    .map(async item => {
-      const videoDetails = await fetchVideoDetails(item.id.videoId)
+    .map(item => {
       return {
         id: item.id.videoId,
         channelId: item.snippet.channelId,
         title: item.snippet.title,
         link: `https://youtube.com/watch?v=${item.id.videoId}`,
         published: new Date(item.snippet.publishedAt),
-        description: videoDetails.snippet.description,
+        // description: videoDetails.snippet.description,
         thumbnail: item.snippet.thumbnails,
-        statistics: videoDetails.statistics,
+        // statistics: videoDetails.statistics,
         upcoming:
           item &&
           item.snippet &&
@@ -145,6 +144,9 @@ const parseFeedAndNormalizeData = async (feedAsString, model) => {
 
   for (let i = 0; i < videos.length; i++) {
     const permalink = await getPermalink(videos[i].id, videos[i].title, model)
+    const videoDetails = await fetchVideoDetails(videos[i].id)
+    videos[i].description = videoDetails.snippet.description
+    videos[i].statistics = videoDetails.statistics
     videos[i].permalink = permalink
   }
 
