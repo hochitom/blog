@@ -18,14 +18,14 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter('readableDate', dateObj => {
     return DateTime.fromJSDate(dateObj)
       .setZone('Europe/Vienna')
-      .setLocale('de')
-      .toFormat('dd. LLLL yyyy')
+      .toFormat('dd. LLLL yyyy', { locale: 'de-AT' })
   })
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter('htmlDateString', dateObj => {
     return DateTime.fromJSDate(dateObj)
       .setZone('Europe/Vienna')
+      .setLocale('de')
       .toFormat('yyyy-LL-dd')
   })
 
@@ -40,6 +40,7 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addCollection('tagList', require('./_11ty/getTagList'))
   eleventyConfig.addCollection('videos', require('./_11ty/videos-v2'))
+  eleventyConfig.addCollection('latestVideo', require('./_11ty/videos-v2'))
 
   eleventyConfig.addPassthroughCopy('img')
   eleventyConfig.addPassthroughCopy('css')
