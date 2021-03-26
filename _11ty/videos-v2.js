@@ -18,6 +18,10 @@ slugify.extend({ ß: 'ss' })
 const youtubeUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCxpmQStO4F1ycGde21DXolg&maxResults=100&key=${youtubeKey}`
 const mongoUrl = `mongodb+srv://${mongoUser}:${mongoPw}@main.aiphv.mongodb.net/blog?retryWrites=true&w=majority`
 
+const getVideoDetailUrl = videoId => {
+  return `https://content-youtube.googleapis.com/youtube/v3/videos?part=statistics%2C%20snippet&id=${videoId}&key=${youtubeKey}`
+}
+
 const Schema = mongoose.Schema
 
 const Permalink = new Schema({
@@ -55,6 +59,27 @@ const fetchFeed = function() {
   })
 }
 
+const fetchVideoDetails = function(id) {
+  return new Promise((resolve, reject) => {
+    http.get(getVideoDetailUrl(id)).on('response', function(response) {
+      let string = ''
+
+      response.on('data', function(chunk) {
+        string += chunk
+      })
+
+      response.on('end', function() {
+        const result = JSON.parse(string)
+        resolve(result.items[0])
+      })
+
+      response.on('error', function() {
+        reject()
+      })
+    })
+  })
+}
+
 const createPermalink = string => {
   return slugify(string.split('|')[0], {
     strict: true,
@@ -83,22 +108,24 @@ const getPermalink = async (id, title, model) => {
   return newPermalink
 }
 
-const getSortedVideos = items => {
+const getSortedVideos = async items => {
   return items
     .filter(r => r && r.id && r.id.kind === 'youtube#video')
     .sort(
       (a, b) =>
         new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt)
     )
-    .map(item => {
+    .map(async item => {
+      const videoDetails = await fetchVideoDetails(item.id.videoId)
       return {
         id: item.id.videoId,
         channelId: item.snippet.channelId,
         title: item.snippet.title,
         link: `https://youtube.com/watch?v=${item.id.videoId}`,
         published: new Date(item.snippet.publishedAt),
-        description: item.snippet.description,
+        description: videoDetails.snippet.description,
         thumbnail: item.snippet.thumbnails,
+        statistics: videoDetails.statistics,
         upcoming:
           item &&
           item.snippet &&
@@ -114,7 +141,7 @@ const parseFeedAndNormalizeData = async (feedAsString, model) => {
     return []
   }
 
-  const videos = getSortedVideos(feed.items)
+  const videos = await getSortedVideos(feed.items)
 
   for (let i = 0; i < videos.length; i++) {
     const permalink = await getPermalink(videos[i].id, videos[i].title, model)
