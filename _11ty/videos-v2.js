@@ -146,7 +146,7 @@ const parseFeedAndNormalizeData = async (feedAsString, model) => {
     const permalink = await getPermalink(videos[i].id, videos[i].title, model)
     const videoDetails = await fetchVideoDetails(videos[i].id)
     videos[i].description = videoDetails.snippet.description
-    videos[i].statistics = videoDetails.statistics
+    videos[i].viewCount = videoDetails.statistics.viewCount
     videos[i].permalink = permalink
   }
 
