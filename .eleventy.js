@@ -6,6 +6,8 @@ const pluginNavigation = require('@11ty/eleventy-navigation')
 const markdownIt = require('markdown-it')
 const markdownItAnchor = require('markdown-it-anchor')
 
+const getVideos = require('./_11ty/videos-v2')
+
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss)
   eleventyConfig.addPlugin(pluginSyntaxHighlight)
@@ -40,7 +42,13 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addCollection('tagList', require('./_11ty/getTagList'))
   eleventyConfig.addCollection('videos', require('./_11ty/videos-v2'))
-  eleventyConfig.addCollection('latestVideo', require('./_11ty/videos-v2'))
+
+  eleventyConfig.addFilter('latestVlog', require('./_11ty/latestVlog'))
+  eleventyConfig.addFilter('popularVideos', require('./_11ty/popularVideos'))
+  eleventyConfig.addFilter(
+    'excludeHeroVideo',
+    require('./_11ty/excludeHeroVideo')
+  )
 
   eleventyConfig.addPassthroughCopy('img')
   eleventyConfig.addPassthroughCopy('css')
