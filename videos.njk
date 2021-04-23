@@ -13,8 +13,7 @@ eleventyNavigation:
         <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Videos</h2>
       </div>
 
-        {% set videolist = collections.videos %}
-        {% set videolistCounter = collections.videos | length %}
+        {% set videolist = collections.videos | latestToOldest %}
         {% include "videolist.njk" %}
     </div>
   </div>

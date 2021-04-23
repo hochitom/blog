@@ -50,6 +50,12 @@ module.exports = function(eleventyConfig) {
     require('./_11ty/excludeHeroVideo')
   )
 
+  eleventyConfig.addFilter('latestToOldest', function(videos) {
+    return videos.sort(function(a, b) {
+      return b.published - a.published // sort by date - descending
+    })
+  })
+
   eleventyConfig.addPassthroughCopy('img')
   eleventyConfig.addPassthroughCopy('css')
   eleventyConfig.addPassthroughCopy('./sw.js')
