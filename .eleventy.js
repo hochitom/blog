@@ -12,8 +12,7 @@ const getVideos = require('./_11ty/videos-v2')
 async function imageShortcode(src, cls, alt, sizes) {
   let metadata = await Image(src, {
     widths: [300, 600],
-    // formats: ['avif', 'jpeg'],
-    output: './img/v/',
+    outputDir: './img/v/',
   })
 
   let imageAttributes = {
