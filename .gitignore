@@ -3,3 +3,8 @@ node_modules/
 css/style.css
 mix-manifest.json
 .env
+.cache
+
+*.webp
+*.avif
+*.jpeg

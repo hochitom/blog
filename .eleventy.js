@@ -5,13 +5,37 @@ const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
 const pluginNavigation = require('@11ty/eleventy-navigation')
 const markdownIt = require('markdown-it')
 const markdownItAnchor = require('markdown-it-anchor')
+const Image = require('@11ty/eleventy-img')
 
 const getVideos = require('./_11ty/videos-v2')
+
+async function imageShortcode(src, cls, alt, sizes) {
+  let metadata = await Image(src, {
+    widths: [300, 600],
+    // formats: ['avif', 'jpeg'],
+    output: './img/v/',
+  })
+
+  let imageAttributes = {
+    class: cls,
+    alt,
+    sizes,
+    loading: 'lazy',
+    decoding: 'async',
+  }
+
+  // You bet we throw an error on missing alt in `imageAttributes` (alt="" works okay)
+  return Image.generateHTML(metadata, imageAttributes)
+}
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss)
   eleventyConfig.addPlugin(pluginSyntaxHighlight)
   eleventyConfig.addPlugin(pluginNavigation)
+
+  eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode)
+  eleventyConfig.addLiquidShortcode('image', imageShortcode)
+  eleventyConfig.addJavaScriptFunction('image', imageShortcode)
 
   eleventyConfig.setDataDeepMerge(true)
 
