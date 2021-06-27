@@ -4,7 +4,4 @@ css/style.css
 mix-manifest.json
 .env
 .cache
-
-*.webp
-*.avif
-*.jpeg
+img/v/
