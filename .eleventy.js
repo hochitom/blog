@@ -7,8 +7,6 @@ const markdownIt = require('markdown-it')
 const markdownItAnchor = require('markdown-it-anchor')
 const Image = require('@11ty/eleventy-img')
 
-const getVideos = require('./_11ty/videos-v2')
-
 async function imageShortcode(src, cls, alt, sizes) {
   let metadata = await Image(src, {
     widths: [300, 600],
@@ -72,7 +70,12 @@ module.exports = function(eleventyConfig) {
   })
 
   eleventyConfig.addCollection('tagList', require('./_11ty/getTagList'))
-  eleventyConfig.addCollection('videos', require('./_11ty/videos-v2'))
+  // Videos: eine Markdown-Datei pro Video in videos/, neueste zuerst
+  eleventyConfig.addCollection('videos', collection =>
+    collection
+      .getFilteredByGlob('videos/*.md')
+      .sort((a, b) => b.date - a.date)
+  )
 
   eleventyConfig.addFilter('latestVlog', require('./_11ty/latestVlog'))
   eleventyConfig.addFilter('popularVideos', require('./_11ty/popularVideos'))
@@ -82,8 +85,8 @@ module.exports = function(eleventyConfig) {
   )
 
   eleventyConfig.addFilter('latestToOldest', function(videos) {
-    return videos.sort(function(a, b) {
-      return b.published - a.published // sort by date - descending
+    return [...videos].sort(function(a, b) {
+      return b.date - a.date // sort by date - descending
     })
   })
 

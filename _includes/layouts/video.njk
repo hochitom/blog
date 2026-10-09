@@ -1,26 +1,18 @@
 ---
-pagination:
-  data: collections.videos
-  size: 1
-  alias: video
-  addAllPagesToCollections: true
 layout: layouts/home.njk
-renderData:
-  title: "{{ video.title }}"
-permalink: /videos/{{ video.permalink }}/
 ---
 
 <div class="relative py-16 bg-white overflow-hidden">
     <div class="relative px-4 sm:px-6 lg:px-8 max-w-screen-xl mx-auto">
         <div class="relative mb-6" style="padding-bottom: 56%">
-            <iframe class="w-full absolute" style="height: 100%" src="https://www.youtube-nocookie.com/embed/{{ video.id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="w-full absolute" style="height: 100%" src="https://www.youtube-nocookie.com/embed/{{ id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="text-lg max-w-prose mx-auto mb-6">
-            <h1 class="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">{{ video.title }}</h1>
+            <h1 class="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">{{ title }}</h1>
         </div>
         <div class="prose prose-lg text-gray-500 mx-auto">
-            <p>{{ video.description }}</p>
-            <p><a href="{{ video.link }}">Video auf YouTube anschauen</a></p>
+            {{ content | safe }}
+            <p><a href="{{ link }}">Video auf YouTube anschauen</a></p>
         </div>
     </div>
 </div>
@@ -33,7 +25,6 @@ permalink: /videos/{{ video.permalink }}/
       </div>
 
       {% set videolist = collections.videos | head(4) %}
-      {% set videolistCounter = collections.videos | length %}
       {% include "videolist.njk" %}
     </div>
   </div>
