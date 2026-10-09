@@ -27,7 +27,6 @@ npm run build  # statischer Build nach _site/
 
 * **Videos:** Der YouTube-Feed wird beim Build geladen und einen Tag lang in `.cache/` zwischengespeichert. Ist YouTube nicht erreichbar, wird der letzte Cache genutzt, ohne Cache bleibt die Videoliste leer.
 * **Dependencies:** Dependabot erstellt wöchentlich Updates, die GitHub Action `Build` prüft jeden Pull Request.
-* **Planung:** Hintergrund zum Upgrade auf Eleventy 3 steht in `UPGRADE-PLAN.md`.
 
 ## Lizenz
 
