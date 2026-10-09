@@ -1,27 +1,16 @@
-const http = require('https')
+const EleventyFetch = require('@11ty/eleventy-fetch')
 const parseString = require('xml2js').parseString
 
+const FEED_URL =
+  'https://www.youtube.com/feeds/videos.xml?channel_id=UCxpmQStO4F1ycGde21DXolg'
+
+// Cached für 1 Tag. Bei Netzwerkfehlern nutzt eleventy-fetch den letzten
+// gespeicherten Stand (.cache), ohne Cache bleibt die Videoliste leer.
 const fetchFeed = function() {
-  return new Promise((resolve, reject) => {
-    http
-      .get(
-        'https://www.youtube.com/feeds/videos.xml?channel_id=UCxpmQStO4F1ycGde21DXolg'
-      )
-      .on('response', function(response) {
-        let string = ''
-
-        response.on('data', function(chunk) {
-          string += chunk
-        })
-
-        response.on('end', function() {
-          resolve(string)
-        })
-
-        response.on('error', function() {
-          reject()
-        })
-      })
+  return EleventyFetch(FEED_URL, {
+    duration: '1d',
+    type: 'text',
+    fetchOptions: { signal: AbortSignal.timeout(10000) },
   })
 }
 
@@ -51,7 +40,7 @@ const parseFeedAndNormalizeData = function(feedAsString) {
               media: media,
             }
           })
-          .sort((a, b) => a.published > b.published)
+          .sort((a, b) => b.published - a.published)
         return resolve(normalizedData)
       }
 
@@ -61,7 +50,11 @@ const parseFeedAndNormalizeData = function(feedAsString) {
 }
 
 module.exports = async function() {
-  const feed = await fetchFeed()
-  const videos = await parseFeedAndNormalizeData(feed)
-  return videos
+  try {
+    const feed = await fetchFeed()
+    return await parseFeedAndNormalizeData(feed)
+  } catch (e) {
+    console.warn('[videos] YouTube-Feed nicht verfügbar, Videoliste bleibt leer.', e && e.message)
+    return []
+  }
 }
