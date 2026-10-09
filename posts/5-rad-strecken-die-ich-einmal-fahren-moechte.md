@@ -8,7 +8,7 @@ tags:
   - Ziele
 ---
 
-In einem meiner ersten Artikel am Blog erzählte ich euch von den [fünf Radrennen](/fuenf-radrennen-bei-denen-ich-einmal-start-stehen-moechte/) bei denen ich einmal am Start stehen möchte. Nachdem mich einige Leute darauf angesprochen haben, habe ich beschlossen einen weiteren Artikel über Strecken bzw. Berge zu schreiben die ich einmal mit dem Rad bezwingen möchte.
+In einem meiner ersten Artikel am Blog erzählte ich euch von den [fünf Radrennen](/posts/fuenf-radrennen-bei-denen-ich-einmal-start-stehen-moechte/) bei denen ich einmal am Start stehen möchte. Nachdem mich einige Leute darauf angesprochen haben, habe ich beschlossen einen weiteren Artikel über Strecken bzw. Berge zu schreiben die ich einmal mit dem Rad bezwingen möchte.
 
 ## Großglockner
 

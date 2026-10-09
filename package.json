@@ -1,7 +1,7 @@
 {
-  "name": "eleventy-base-blog",
-  "version": "5.0.2",
-  "description": "A starter repository for a blog web site using the Eleventy static site generator.",
+  "name": "hochitom-blog",
+  "version": "6.0.0",
+  "description": "Persönlicher Blog über Radfahren (hochitom.at), gebaut mit Eleventy.",
   "scripts": {
     "build": "eleventy",
     "start": "eleventy --serve",
@@ -11,18 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/11ty/eleventy-base-blog.git"
+    "url": "git+https://github.com/hochitom/blog.git"
   },
   "author": {
-    "name": "Zach Leatherman",
-    "email": "zachleatherman@gmail.com",
-    "url": "https://zachleat.com/"
+    "name": "Thomas Hochörtler",
+    "email": "hi@hochitom.at"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/11ty/eleventy-base-blog/issues"
+    "url": "https://github.com/hochitom/blog/issues"
   },
-  "homepage": "https://github.com/11ty/eleventy-base-blog#readme",
+  "homepage": "https://hochitom.at/",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
     "@11ty/eleventy-navigation": "^1.0.5",
@@ -39,5 +38,6 @@
   "engines": {
     "node": ">=24"
   },
-  "type": "module"
+  "type": "module",
+  "private": true
 }
