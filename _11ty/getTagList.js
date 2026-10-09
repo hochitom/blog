@@ -1,4 +1,4 @@
-module.exports = function(collection) {
+export default function(collection) {
   let tagSet = new Set();
   collection.getAll().forEach(function(item) {
     if( "tags" in item.data ) {
@@ -23,6 +23,6 @@ module.exports = function(collection) {
     }
   });
 
-  // returning an array in addCollection works in Eleventy 0.5.3
-  return [...tagSet];
-};
+  // returning an array in addCollection works in Eleventy 0.5.3+; sorted for reproducible builds
+  return [...tagSet].sort();
+}

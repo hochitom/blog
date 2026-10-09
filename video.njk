@@ -5,7 +5,7 @@ pagination:
   alias: video
   addAllPagesToCollections: true
 layout: layouts/home.njk
-renderData:
+eleventyComputed:
   title: "{{ video.title }}"
 permalink: /videos/{{ video.id }}/
 ---

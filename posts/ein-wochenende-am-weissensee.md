@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Ein Wochenende am Weißensee
 date: 2017-06-24
 tags: ['Ausfahrten']

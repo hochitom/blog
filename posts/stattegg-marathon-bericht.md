@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: 14. GRAZER BIKE-MARATHON STATTEGG 2015
 date: 2015-08-20
 tags: ["Marathon", "Mountainbike", "Rennberichte", "Schöckl"]

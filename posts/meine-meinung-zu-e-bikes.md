@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Meine Meinung zu E-Bikes
 date: 2017-04-04
 tags: ["Meinung"]

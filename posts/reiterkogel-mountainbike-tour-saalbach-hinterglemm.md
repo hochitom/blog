@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Auf den Reiterkogel
 date: 2017-07-18
 tags: ['Saalbach', 'Touren', 'Trails']

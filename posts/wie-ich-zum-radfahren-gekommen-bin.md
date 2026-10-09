@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Wie ich zum Radfahren gekommen bin
 date: 2017-02-19
 tags: ["Allgemein"]

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Fünf Radrennen bei denen ich einmal am Start stehen möchte
 date: 2017-01-23
 tags: ["Allgemein","Herausforderungen","Rennen","Ziele","Zukunft"]

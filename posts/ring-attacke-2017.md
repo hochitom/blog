@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Ring Attacke 2017
 date: 2017-05-29
 tags: ['Rennberichte', 'Rennrad']

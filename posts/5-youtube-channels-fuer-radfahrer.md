@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: 5 YouTube-Channels für Radfahrer
 date: 2017-03-04
 tags: ["Allgemein"]

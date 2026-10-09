@@ -1,19 +1,16 @@
-const { DateTime } = require('luxon')
-const fs = require('fs')
-const pluginRss = require('@11ty/eleventy-plugin-rss')
-const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
-const pluginNavigation = require('@11ty/eleventy-navigation')
-const markdownIt = require('markdown-it')
-const markdownItAnchor = require('markdown-it-anchor')
+import { DateTime } from 'luxon'
+import pluginRss from '@11ty/eleventy-plugin-rss'
+import pluginSyntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight'
+import pluginNavigation from '@11ty/eleventy-navigation'
+import markdownIt from 'markdown-it'
+import markdownItAnchor from 'markdown-it-anchor'
+import getTagList from './_11ty/getTagList.js'
+import videos from './_11ty/videos.js'
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss)
   eleventyConfig.addPlugin(pluginSyntaxHighlight)
   eleventyConfig.addPlugin(pluginNavigation)
-
-  eleventyConfig.setDataDeepMerge(true)
-
-  eleventyConfig.addLayoutAlias('post', 'layouts/post.njk')
 
   eleventyConfig.addFilter('readableDate', (dateObj) => {
     return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('dd LLL yyyy')
@@ -33,8 +30,8 @@ module.exports = function (eleventyConfig) {
     return array.slice(0, n)
   })
 
-  eleventyConfig.addCollection('tagList', require('./_11ty/getTagList'))
-  eleventyConfig.addCollection('videos', require('./_11ty/videos'))
+  eleventyConfig.addCollection('tagList', getTagList)
+  eleventyConfig.addCollection('videos', videos)
 
   eleventyConfig.addPassthroughCopy('img')
   eleventyConfig.addPassthroughCopy('css')
@@ -50,23 +47,6 @@ module.exports = function (eleventyConfig) {
     permalinkSymbol: '#',
   })
   eleventyConfig.setLibrary('md', markdownLibrary)
-
-  // Browsersync Overrides
-  eleventyConfig.setBrowserSyncConfig({
-    callbacks: {
-      ready: function (err, browserSync) {
-        const content_404 = fs.readFileSync('_site/404.html')
-
-        browserSync.addMiddleware('*', (req, res) => {
-          // Provides the 404 content without redirect.
-          res.write(content_404)
-          res.end()
-        })
-      },
-    },
-    ui: false,
-    ghostMode: false,
-  })
 
   return {
     templateFormats: ['md', 'njk', 'html', 'liquid'],

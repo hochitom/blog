@@ -1,5 +1,7 @@
-const EleventyFetch = require('@11ty/eleventy-fetch')
-const parseString = require('xml2js').parseString
+import EleventyFetch from '@11ty/eleventy-fetch'
+import xml2js from 'xml2js'
+
+const parseString = xml2js.parseString
 
 const FEED_URL =
   'https://www.youtube.com/feeds/videos.xml?channel_id=UCxpmQStO4F1ycGde21DXolg'
@@ -49,7 +51,7 @@ const parseFeedAndNormalizeData = function(feedAsString) {
   })
 }
 
-module.exports = async function() {
+export default async function() {
   try {
     const feed = await fetchFeed()
     return await parseFeedAndNormalizeData(feed)

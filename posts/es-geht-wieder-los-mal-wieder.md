@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Es geht wieder los. Mal wieder.
 date: 2016-12-25
 tags: ["Allgemein"]

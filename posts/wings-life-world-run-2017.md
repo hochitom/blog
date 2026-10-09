@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Wings For Life World Run 2017
 date: 2017-05-15
 tags: ["Laufen","Rennberichte"]

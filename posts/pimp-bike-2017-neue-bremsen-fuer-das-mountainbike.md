@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Pimp my Bike 2017 - neue Bremsen für das Mountainbike
 date: 2017-04-30
 tags: ["Ausrüstung", "Bremsen", "Fox", "Magura", "Sattelstütze"]

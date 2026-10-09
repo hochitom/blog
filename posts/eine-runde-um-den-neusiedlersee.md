@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Eine Runde um den Neusiedlersee
 date: 2017-08-14
 tags: ['Ausfahrten']

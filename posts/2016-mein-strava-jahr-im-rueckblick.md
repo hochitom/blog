@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: 2016. Mein STRAVA Jahr im Rückblick
 date: 2017-01-09
 tags: ['Allgemein', 'Auswertung', 'Daten', 'Highlights', 'Video', 'Strava']

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Richtiges Verhalten bei Gewittern in den Bergen
 date: 2017-07-30
 tags: ["Allgemein","Gewitter"]

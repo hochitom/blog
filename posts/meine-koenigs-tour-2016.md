@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Meine Königs-Tour 2016
 date: 2017-02-06
 tags: ["Ausfahrten","Rennrad"]

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: layouts/post.njk
 title: Was ist in meinem Rucksack?
 date: 2017-06-15
 tags: ["Ausrüstung"]
