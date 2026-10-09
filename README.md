@@ -5,7 +5,6 @@ Persönlicher Blog über Radfahren, gebaut mit Eleventy und Tailwind CSS und geh
 ## Voraussetzungen
 
 * Node.js 24 (siehe `.nvmrc`)
-* Zugangsdaten für die Video-Pipeline (siehe unten)
 
 ## Entwicklung
 
@@ -27,7 +26,8 @@ Weitere Befehle:
 * `posts/` – Blogartikel als Markdown
 * `_includes/` – Layouts und Partials (Nunjucks)
 * `_data/metadata.json` – Seitentitel, Autor und Feed-Angaben
-* `_11ty/` – eigene Collections und Filter (Tag-Liste, Videos)
+* `_11ty/` – eigene Collections und Filter (Tag-Liste, Video-Filter)
+* `videos/` – Videos als Markdown-Dateien (siehe unten)
 * `.eleventy.js` – Eleventy-Konfiguration
 * `resources/css/` – Tailwind-Quelle; das erzeugte `css/style.css` wird nicht eingecheckt
 * `img/` – Bilder, werden über den `image`-Shortcode in mehrere Größen umgewandelt
@@ -35,13 +35,12 @@ Weitere Befehle:
 
 ## Videos
 
-Die Videoliste wird beim Build über die YouTube Data API geladen. Die Permalinks der Videos werden in einer MongoDB gespeichert, damit sich die URLs nicht ändern. Dafür werden diese Umgebungsvariablen gebraucht:
+Die Videos liegen als statische Dateien im Projekt, es gibt keine Abhängigkeit mehr von YouTube-API oder Datenbank:
 
-* `youtube_api` – API-Schlüssel der YouTube Data API
-* `mongo_user` – Benutzer der MongoDB
-* `mongo_pw` – Passwort der MongoDB
+* `videos/<name>.md` – ein Video pro Datei: Metadaten im Front Matter (`id`, `title`, `date`, `permalink`, `viewCount`, `thumbnail`, `link`), die Beschreibung als Markdown-Text darunter
+* `img/videos/<id>.jpg` – Vorschaubild des Videos
 
-Lokal können sie in einer `.env` im Projektordner stehen (die Datei ist von Git ausgeschlossen). Auf Netlify werden sie unter „Environment variables“ gesetzt. Ohne gültige Zugangsdaten bricht der Build derzeit ab.
+Das Video selbst wird weiterhin von YouTube (`youtube-nocookie.com`) eingebettet. Texte lassen sich direkt in den Markdown-Dateien ändern. Ein neues Video ist eine neue Datei mit dem gleichen Aufbau. Die Collection `videos` (neueste zuerst) wird in `.eleventy.js` aus `videos/*.md` gebildet.
 
 ## Deployment
 
