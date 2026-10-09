@@ -9,7 +9,8 @@
     "serve": "eleventy --serve",
     "debug": "DEBUG=* eleventy",
     "css": "tailwindcss -i resources/css/style.css -o css/style.css --minify",
-    "css:watch": "tailwindcss -i resources/css/style.css -o css/style.css --watch"
+    "css:watch": "tailwindcss -i resources/css/style.css -o css/style.css --watch",
+    "export:videos": "node scripts/export-videos.js"
   },
   "repository": {
     "type": "git",
