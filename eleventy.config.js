@@ -42,10 +42,15 @@ export default function (eleventyConfig) {
     breaks: true,
     linkify: true,
   }).use(markdownItAnchor, {
-    permalink: true,
-    permalinkClass: 'direct-link',
-    permalinkSymbol: '#',
+    permalink: markdownItAnchor.permalink.linkInsideHeader({
+      class: 'direct-link',
+      symbol: '#',
+      placement: 'after',
+    }),
+    tabIndex: false,
   })
+  // markdown-it >= 14 verlinkt Domains ohne Protokoll nicht mehr automatisch
+  markdownLibrary.linkify.set({ fuzzyLink: true })
   eleventyConfig.setLibrary('md', markdownLibrary)
 
   return {
