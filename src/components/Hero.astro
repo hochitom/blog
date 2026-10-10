@@ -1,0 +1,110 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import VideoEmbed from './VideoEmbed.astro'
+import { htmlDateString, readableDate } from '../lib/dates'
+
+interface Props {
+  video: CollectionEntry<'videos'>
+}
+
+const { video } = Astro.props
+---
+
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__player">
+      <VideoEmbed id={video.data.id} title={video.data.title} />
+    </div>
+    <div class="hero__text">
+      <p class="hero__label eyebrow">Neuestes Video</p>
+      <h1 class="hero__title display">{video.data.title}</h1>
+      <time class="hero__date" datetime={htmlDateString(video.data.date)}>
+        {readableDate(video.data.date)}
+      </time>
+      <div class="hero__actions">
+        <a href={`/videos/${video.id}/`} class="button">Video ansehen</a>
+        <a href="/videos/" class="hero__link">Alle Videos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    --focus-color: var(--color-white);
+    background-color: var(--color-ink-deep);
+    color: var(--color-white);
+  }
+
+  .hero__inner {
+    display: grid;
+    gap: 2rem;
+    align-items: end;
+    max-width: var(--width-content);
+    margin-inline: auto;
+    padding: 2rem 1rem 3rem;
+  }
+
+  .hero__player :global(.embed) {
+    margin-bottom: 0;
+  }
+
+  .hero__label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-accent-900);
+  }
+
+  .hero__label::before {
+    content: '';
+    width: 1.75rem;
+    height: 0.1875rem;
+    background-color: var(--color-primary-900);
+  }
+
+  .hero__title {
+    margin-top: 1rem;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    text-wrap: balance;
+  }
+
+  .hero__date {
+    display: block;
+    margin-top: 1rem;
+    color: var(--color-accent-900);
+    font-size: 1.125rem;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .hero__link {
+    border-bottom: 2px solid var(--color-accent-900);
+    font-weight: 500;
+    transition: border-color 0.15s ease-in-out;
+  }
+
+  .hero__link:hover {
+    border-bottom-color: var(--color-primary-900);
+  }
+
+  @media (min-width: 40rem) {
+    .hero__inner {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .hero__inner {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      padding: 3.5rem 2rem 4rem;
+    }
+  }
+</style>

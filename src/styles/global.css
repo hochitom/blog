@@ -1,3 +1,10 @@
+@import '@fontsource/barlow/latin-400.css';
+@import '@fontsource/barlow/latin-500.css';
+@import '@fontsource/barlow/latin-600.css';
+@import '@fontsource/barlow-condensed/latin-600.css';
+@import '@fontsource/barlow-condensed/latin-700.css';
+@import '@fontsource/barlow-condensed/latin-800.css';
+@import '@fontsource-variable/source-serif-4/wght.css';
 @import './tokens.css';
 @import './reset.css';
 @import './prose.css';
@@ -46,4 +53,39 @@ main {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+/* Wiederverwendbare Bausteine */
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
+  padding-inline: 1.5rem;
+  background-color: var(--color-primary-900);
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.button:hover {
+  background-color: var(--color-primary-950);
 }

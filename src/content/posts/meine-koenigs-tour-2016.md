@@ -2,6 +2,11 @@
 title: Meine Königs-Tour 2016
 date: 2017-02-06
 tags: ["Ausfahrten","Rennrad"]
+facts:
+  - { label: "Distanz", value: "130 km" }
+  - { label: "Höhenmeter", value: "1.800 m" }
+  - { label: "Fahrzeit", value: "> 5 Std." }
+  - { label: "Etappenziel", value: "Mariazell" }
 ---
 
 ![Mariazell 2016 - Fotos vor der Basilika](../../assets/img/mariazell-2016-1024x341.jpg)

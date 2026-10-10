@@ -35,11 +35,11 @@ const hasBody = Astro.slots.has('default')
     position: relative;
     overflow: hidden;
     padding-block: 4rem;
-    background-color: var(--color-white);
+    background-color: var(--color-paper);
   }
 
   .section--dark {
-    background-color: var(--color-tertiary-900);
+    background-color: var(--color-ink-deep);
     color: var(--color-white);
   }
 
@@ -56,34 +56,26 @@ const hasBody = Astro.slots.has('default')
   .section__header {
     max-width: var(--width-prose);
     margin-inline: auto;
-    margin-bottom: 1.5rem;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .section__inner--wide .section__header {
+    max-width: none;
   }
 
   .section__title {
+    margin-top: 0.75rem;
     color: var(--color-tertiary-900);
-    margin-top: 0.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    font-size: 1.875rem;
-    line-height: 2rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
     font-weight: 800;
-    letter-spacing: -0.025em;
+    line-height: 0.95;
+    text-transform: uppercase;
+    text-wrap: balance;
   }
 
   .section--dark .section__title {
     color: var(--color-white);
-  }
-
-  .section__title::after {
-    content: '';
-    display: block;
-    width: 3rem;
-    height: 0.25rem;
-    margin: 1rem auto 0;
-    border-radius: var(--radius-full);
-    background-color: var(--color-primary-900);
   }
 
   .section__body {
@@ -94,14 +86,13 @@ const hasBody = Astro.slots.has('default')
     .section__inner {
       padding-inline: 1.5rem;
     }
-
-    .section__title {
-      font-size: 2.25rem;
-      line-height: 2.5rem;
-    }
   }
 
   @media (min-width: 64rem) {
+    .section {
+      padding-block: 5rem;
+    }
+
     .section__inner {
       padding-inline: 2rem;
     }

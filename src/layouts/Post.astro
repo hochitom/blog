@@ -1,45 +1,243 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import Base from './Base.astro'
-import ContentSection from '../components/ContentSection.astro'
+import { htmlDateString, readableDate } from '../lib/dates'
+import { excerpt, getPosts } from '../lib/content'
 
 interface Props {
   post: CollectionEntry<'posts'>
 }
 
 const { post } = Astro.props
+const { title, date, tags, facts } = post.data
+
+// zwei weitere Artikel, bevorzugt mit gemeinsamem Tag
+const others = (await getPosts()).filter(other => other.id !== post.id)
+const related = [
+  ...others.filter(other => other.data.tags.some(tag => tags.includes(tag))),
+  ...others,
+].filter((other, index, all) => all.indexOf(other) === index).slice(0, 2)
 ---
 
-<Base title={post.data.title}>
-  <ContentSection title={post.data.title}>
-    <div slot="meta" class="tag-list">
-      {post.data.tags.map(tag => <a href={`/tags/${tag}/`} class="tag-link">{tag}</a>)}
+<Base title={title} description={excerpt(post.body ?? '') || undefined}>
+  <article class="post">
+    <header class="post__header">
+      <div class="post__inner">
+        <a href="/posts/" class="post__back eyebrow">← Artikel</a>
+        <div class="post__meta eyebrow">
+          {tags.map(tag => <a href={`/tags/${tag}/`} class="post__tag">{tag}</a>)}
+          <time datetime={htmlDateString(date)}>{readableDate(date)}</time>
+        </div>
+        <h1 class="post__title display">{title}</h1>
+      </div>
+    </header>
+
+    {
+      facts.length > 0 && (
+        <div class="post__facts-wrap">
+          <dl class="post__facts">
+            {facts.map(fact => (
+              <div class="fact">
+                <dt class="fact__label eyebrow">{fact.label}</dt>
+                <dd class="fact__value display">{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )
+    }
+
+    <div class="post__body">
+      <div class="prose prose-lg">
+        <slot />
+      </div>
     </div>
 
-    <slot />
-    <p><a href="/">← Home</a></p>
-  </ContentSection>
+    {
+      related.length > 0 && (
+        <aside class="post__more">
+          <h2 class="post__more-title display">Weiterlesen</h2>
+          <ul class="post__more-list">
+            {related.map(other => (
+              <li>
+                <a href={`/posts/${other.id}/`} class="more">
+                  <span class="more__tags eyebrow">{other.data.tags.join(' · ')}</span>
+                  <span class="more__title display">{other.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )
+    }
+  </article>
 </Base>
 
 <style>
-  .tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.25rem 1rem;
+  .post {
+    background-color: var(--color-paper);
   }
 
-  .tag-link {
-    color: var(--color-primary-900);
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .post__header {
+    padding-block: 3rem 2rem;
+  }
+
+  .post__inner,
+  .post__facts-wrap,
+  .post__body,
+  .post__more {
+    max-width: 68rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  .post__back {
+    color: var(--color-tertiary-700);
+  }
+
+  .post__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    margin-top: 1.5rem;
+    color: var(--color-tertiary-700);
+  }
+
+  .post__tag {
+    color: var(--color-primary-950);
     transition: color 0.15s ease-in-out;
   }
 
-  .tag-link:hover {
+  .post__tag:hover,
+  .post__back:hover {
+    color: var(--color-primary-900);
+  }
+
+  .post__title {
+    margin-top: 1rem;
     color: var(--color-tertiary-900);
+    font-size: clamp(3rem, 9vw, 7rem);
+    text-wrap: balance;
+  }
+
+  .post__facts-wrap {
+    padding-block: 0;
+  }
+
+  .post__facts {
+    display: grid;
+    background-color: var(--color-tertiary-900);
+    color: var(--color-white);
+  }
+
+  .fact {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid var(--color-tertiary-700);
+  }
+
+  .fact:first-child {
+    border-top: 0;
+  }
+
+  .fact__label {
+    color: var(--color-accent-900);
+    font-size: 0.875rem;
+  }
+
+  .fact__value {
+    margin-top: 0.375rem;
+    font-size: 2.25rem;
+  }
+
+  .post__body {
+    padding-block: 3rem;
+  }
+
+  .post__body :global(.prose) {
+    max-width: 42.5rem;
+    margin-inline: auto;
+    font-size: 1.1875rem;
+  }
+
+  .post__more {
+    padding-block: 2rem 5rem;
+  }
+
+  .post__more-title {
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 3px solid var(--color-tertiary-900);
+    font-size: 2.25rem;
+  }
+
+  .post__more-list {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .more {
+    display: block;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .more__tags {
+    display: block;
+    color: var(--color-primary-950);
+    font-size: 0.875rem;
+  }
+
+  .more__title {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 2rem;
+    line-height: 1;
+    transition: color 0.15s ease-in-out;
+  }
+
+  .more:hover .more__title {
+    color: var(--color-primary-900);
+  }
+
+  @media (min-width: 40rem) {
+    .post__inner,
+    .post__facts-wrap,
+    .post__body,
+    .post__more {
+      padding-inline: 1.5rem;
+    }
+
+    .post__facts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fact:nth-child(2) {
+      border-top: 0;
+    }
+
+    .fact:nth-child(even) {
+      border-left: 1px solid var(--color-tertiary-700);
+    }
+
+    .post__more-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2.5rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .post__facts {
+      grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    }
+
+    .fact,
+    .fact:nth-child(even) {
+      border-top: 0;
+      border-left: 1px solid var(--color-tertiary-700);
+    }
+
+    .fact:first-child {
+      border-left: 0;
+    }
   }
 </style>

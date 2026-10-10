@@ -8,6 +8,8 @@ const posts = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
+    // optionale Kennzahlen für Tour- und Rennberichte, z. B. { label: 'Distanz', value: '56 km' }
+    facts: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
   }),
 })
 

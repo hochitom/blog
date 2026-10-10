@@ -24,13 +24,13 @@ const { videos } = Astro.props
           />
 
           <div class="video-card__title">
-            <h4>{video.data.title}</h4>
             <time
               class="video-card__date"
               datetime={htmlDateString(video.data.date)}
             >
               {readableDate(video.data.date)}
             </time>
+            <h4>{video.data.title}</h4>
           </div>
         </a>
       </li>
@@ -58,28 +58,31 @@ const { videos } = Astro.props
     aspect-ratio: 16 / 9;
     object-fit: cover;
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
   }
 
-  .video-card:hover .video-card__image {
-    transform: translateY(-2px);
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.15);
-  }
-
-  .video-card__title {
-    font-size: 1.125rem;
-    line-height: 1.5rem;
-    font-weight: 500;
+  .video-card__title h4 {
+    margin-top: 0.25rem;
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
     transition: color 0.15s ease-in-out;
   }
 
-  .video-card:hover .video-card__title {
+  .video-card:hover .video-card__title h4 {
     color: var(--color-primary-900);
   }
 
   .video-card__date {
-    color: var(--color-tertiary-600);
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--color-tertiary-700);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
   @media (min-width: 40rem) {

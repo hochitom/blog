@@ -1,0 +1,101 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import VideoList from './VideoList.astro'
+import SectionHead from './SectionHead.astro'
+
+interface Props {
+  latest: CollectionEntry<'videos'>[]
+  popular: CollectionEntry<'videos'>[]
+}
+
+const { latest, popular } = Astro.props
+---
+
+<section class="video-tabs">
+  <div class="video-tabs__inner">
+    <SectionHead title="Videos" href="/videos/" linkText="Alle Videos">
+      <div class="video-tabs__tabs" role="tablist" aria-label="Videos sortieren">
+        <button type="button" role="tab" id="tab-latest" aria-controls="panel-latest" aria-selected="true" class="video-tabs__tab">Aktuell</button>
+        <button type="button" role="tab" id="tab-popular" aria-controls="panel-popular" aria-selected="false" tabindex="-1" class="video-tabs__tab">Beliebt</button>
+      </div>
+    </SectionHead>
+
+    <div role="tabpanel" id="panel-latest" aria-labelledby="tab-latest">
+      <VideoList videos={latest} />
+    </div>
+    <div role="tabpanel" id="panel-popular" aria-labelledby="tab-popular" hidden>
+      <VideoList videos={popular} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .video-tabs {
+    background-color: var(--color-white);
+  }
+
+  .video-tabs__inner {
+    max-width: var(--width-content);
+    margin-inline: auto;
+    padding: 3rem 1rem;
+  }
+
+  .video-tabs__tabs {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .video-tabs__tab {
+    padding-block: 0.5rem;
+    border-bottom: 3px solid transparent;
+    color: var(--color-tertiary-700);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .video-tabs__tab[aria-selected='true'] {
+    border-bottom-color: var(--color-primary-900);
+    color: var(--color-tertiary-900);
+  }
+
+  @media (min-width: 40rem) {
+    .video-tabs__inner {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .video-tabs__inner {
+      padding: 5rem 2rem;
+    }
+  }
+</style>
+
+<script>
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>('.video-tabs__tab')]
+
+  const select = (selected: HTMLButtonElement) => {
+    for (const tab of tabs) {
+      const active = tab === selected
+      tab.setAttribute('aria-selected', String(active))
+      tab.tabIndex = active ? 0 : -1
+      const panel = document.getElementById(tab.getAttribute('aria-controls') ?? '')
+      if (panel) panel.hidden = !active
+    }
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => select(tab))
+    // Pfeiltasten wechseln den Tab
+    tab.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return
+      const next = tabs[(index + (event.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]
+      select(next)
+      next.focus()
+    })
+  })
+</script>
