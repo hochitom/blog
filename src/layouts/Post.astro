@@ -2,30 +2,19 @@
 import type { CollectionEntry } from 'astro:content'
 import Base from './Base.astro'
 import ContentSection from '../components/ContentSection.astro'
-import { getTagList } from '../lib/content'
 
 interface Props {
   post: CollectionEntry<'posts'>
 }
 
 const { post } = Astro.props
-const tagList = await getTagList()
 ---
 
 <Base title={post.data.title}>
   <ContentSection title={post.data.title}>
-    <Fragment slot="meta">
-      {
-        post.data.tags
-          .filter(tag => tagList.includes(tag))
-          .map(tag => (
-            <a href={`/tags/${tag}/`} class="tag-link">
-              {tag}
-            </a>
-          ))
-          .flatMap(link => [link, ' '])
-      }
-    </Fragment>
+    <div slot="meta" class="tag-list">
+      {post.data.tags.map(tag => <a href={`/tags/${tag}/`} class="tag-link">{tag}</a>)}
+    </div>
 
     <slot />
     <p><a href="/">← Home</a></p>
@@ -33,11 +22,24 @@ const tagList = await getTagList()
 </Base>
 
 <style>
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 1rem;
+  }
+
   .tag-link {
-    font-size: 1rem;
+    color: var(--color-primary-900);
+    font-size: 0.875rem;
     line-height: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 0.025em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+    transition: color 0.15s ease-in-out;
+  }
+
+  .tag-link:hover {
+    color: var(--color-tertiary-900);
   }
 </style>

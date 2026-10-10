@@ -1,9 +1,11 @@
 ---
 import Base from '../layouts/Base.astro'
+import ContentSection from '../components/ContentSection.astro'
 ---
 
 <Base title="Seite nicht gefunden">
-  <h1>Seite nicht gefunden.</h1>
-
-  <p>Zurück zur <a href="/">Startseite</a>.</p>
+  <ContentSection title="Seite nicht gefunden">
+    <p>Diese Seite gibt es leider nicht (mehr).</p>
+    <p><a href="/">Zurück zur Startseite</a></p>
+  </ContentSection>
 </Base>

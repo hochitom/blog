@@ -32,10 +32,21 @@ const { title, videos } = Astro.props
   }
 
   .video-section__title {
+    color: var(--color-tertiary-900);
     font-size: 1.875rem;
     line-height: 2.25rem;
     font-weight: 800;
     letter-spacing: -0.025em;
+  }
+
+  .video-section__title::after {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: 0.25rem;
+    margin-top: 0.75rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-primary-900);
   }
 
   @media (min-width: 40rem) {

@@ -1,12 +1,25 @@
 ---
 import Base from '../../layouts/Base.astro'
-import { getTagList } from '../../lib/content'
+import ContentSection from '../../components/ContentSection.astro'
+import TagPill from '../../components/TagPill.astro'
+import { getPosts, getTagList } from '../../lib/content'
 
-const tags = await getTagList()
+const [posts, tags] = await Promise.all([getPosts(), getTagList()])
+const count = (tag: string) => posts.filter(post => post.data.tags.includes(tag)).length
 ---
 
 <Base title="Tags">
-  <h1>Tags</h1>
-
-  {tags.map(tag => <a href={`/tags/${tag}/`} class="tag">{tag}</a>)}
+  <ContentSection title="Tags">
+    <p class="tags">
+      {tags.map(tag => <TagPill tag={tag} count={count(tag)} />).flatMap(pill => [pill, ' '])}
+    </p>
+  </ContentSection>
 </Base>
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+</style>

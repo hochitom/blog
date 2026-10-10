@@ -1,27 +1,51 @@
 /* Typografie für Fließtext (Klassen .prose und .prose-lg).
-   Übernommen aus dem früheren @tailwindcss/ui (0.7), damit das Aussehen unverändert bleibt. */
+   Ursprünglich aus @tailwindcss/ui (0.7), die Farben stammen jetzt aus der Palette (tokens.css). */
 
 .prose {
-  color:#4a5568;
+  color:var(--color-tertiary-700);
   max-width:65ch;
 }
 
 .prose [class~=lead] {
-  color:#4a5568;
+  color:var(--color-tertiary-700);
   font-size:1.25em;
   line-height:1.6;
   margin-top:1.2em;
   margin-bottom:1.2em;
 }
 
-.prose a {
-  text-decoration:none;
+.prose a:not([class]) {
+  color:var(--color-tertiary-900);
+  font-weight:600;
+  text-decoration:underline;
+  text-decoration-color:var(--color-accent-900);
+  text-decoration-thickness:.08em;
+  text-underline-offset:.2em;
+  transition:color .15s ease-in-out, text-decoration-color .15s ease-in-out;
 }
 
-.prose a,
+.prose a:not([class]):hover {
+  color:var(--color-primary-900);
+  text-decoration-color:currentColor;
+}
+
 .prose strong {
-  color:#1a202c;
+  color:var(--color-tertiary-900);
   font-weight:600;
+}
+
+/* #-Anker an Überschriften: erst beim Darüberfahren oder per Tastatur sichtbar */
+.prose .direct-link {
+  margin-left:.4em;
+  color:var(--color-tertiary-600);
+  font-weight:400;
+  opacity:0;
+  transition:opacity .15s ease-in-out;
+}
+
+.prose :is(h1,h2,h3,h4):hover .direct-link,
+.prose .direct-link:focus-visible {
+  opacity:1;
 }
 
 .prose ol {
@@ -40,7 +64,7 @@
   content:counter(list-counter) ".";
   position:absolute;
   font-weight:400;
-  color:#718096;
+  color:var(--color-tertiary-600);
 }
 
 .prose ul>li {
@@ -51,7 +75,7 @@
 .prose ul>li:before {
   content:"";
   position:absolute;
-  background-color:#cbd5e0;
+  background-color:var(--color-accent-500);
   border-radius:50%;
   width:.375em;
   height:.375em;
@@ -60,14 +84,14 @@
 }
 
 .prose hr {
-  border-color:#e2e8f0;
+  border-color:var(--color-accent-500);
   border-top-width:1px;
   margin-top:3em;
   margin-bottom:3em;
 }
 
 .prose blockquote {
-  font-weight:500;font-style:italic;color:#1a202c;border-left-width:.25rem;border-left-color:#e2e8f0;quotes:"\201C""\201D""\2018""\2019";
+  font-weight:500;font-style:italic;color:var(--color-tertiary-900);border-left-width:.25rem;border-left-color:var(--color-accent-500);quotes:"\201C""\201D""\2018""\2019";
   margin-top:1.6em;
   margin-bottom:1.6em;
   padding-left:1em;
@@ -82,7 +106,7 @@
 }
 
 .prose h1 {
-  color:#1a202c;
+  color:var(--color-tertiary-900);
   font-weight:800;
   font-size:2.25em;
   margin-top:0;
@@ -91,7 +115,7 @@
 }
 
 .prose h2 {
-  color:#1a202c;
+  color:var(--color-tertiary-900);
   font-weight:700;
   font-size:1.5em;
   margin-top:2em;
@@ -108,7 +132,7 @@
 
 .prose h3,
 .prose h4 {
-  color:#1a202c;
+  color:var(--color-tertiary-900);
   font-weight:600;
 }
 
@@ -119,14 +143,14 @@
 }
 
 .prose figure figcaption {
-  color:#718096;
+  color:var(--color-tertiary-600);
   font-size:.875em;
   line-height:1.4285714;
   margin-top:.8571429em;
 }
 
 .prose code {
-  color:#1a202c;
+  color:var(--color-tertiary-900);
   font-weight:600;
   font-size:.875em;
 }
@@ -137,8 +161,8 @@
 }
 
 .prose pre {
-  color:#e2e8f0;
-  background-color:#2d3748;
+  color:var(--color-white);
+  background-color:var(--color-tertiary-900);
   overflow-x:auto;
   font-size:.875em;
   line-height:1.7142857;
@@ -176,10 +200,10 @@
 }
 
 .prose thead {
-  color:#1a202c;
+  color:var(--color-tertiary-900);
   font-weight:600;
   border-bottom-width:1px;
-  border-bottom-color:#cbd5e0;
+  border-bottom-color:var(--color-accent-500);
 }
 
 .prose thead th {
@@ -191,7 +215,7 @@
 
 .prose tbody tr {
   border-bottom-width:1px;
-  border-bottom-color:#e2e8f0;
+  border-bottom-color:var(--color-accent-500);
 }
 
 .prose tbody tr:last-child {

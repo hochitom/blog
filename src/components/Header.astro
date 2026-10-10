@@ -3,6 +3,10 @@ import Logo from './Logo.astro'
 import { navigation } from '../lib/navigation'
 
 const current = Astro.url.pathname
+
+// Unterseiten (z. B. ein Artikel) markieren ihren Bereich als aktuell
+const isCurrent = (url: string) =>
+  url === '/' ? current === '/' : current.startsWith(url)
 ---
 
 <div class="site-header">
@@ -40,10 +44,8 @@ const current = Astro.url.pathname
         {navigation.map((entry) => (
           <a
             href={entry.url}
-            class:list={[
-              'nav__link',
-              { 'nav__link--current': entry.url === current },
-            ]}
+            class="nav__link"
+              aria-current={isCurrent(entry.url) ? 'page' : undefined}
           >
             {entry.title}
           </a>
@@ -55,6 +57,7 @@ const current = Astro.url.pathname
 
 <style>
   .site-header {
+    --focus-color: var(--color-white);
     position: relative;
     background-color: var(--color-tertiary-900);
     color: var(--color-white);
@@ -83,14 +86,17 @@ const current = Astro.url.pathname
     align-items: center;
     justify-content: center;
     margin-right: -0.5rem;
-    margin-block: -0.5rem;
     padding: 0.5rem;
     border-radius: var(--radius-md);
+    color: var(--color-accent-600);
     cursor: pointer;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
   }
 
-  .nav-toggle:focus {
-    outline: none;
+  .nav-toggle:hover,
+  .nav-toggle[aria-expanded='true'] {
+    background-color: var(--color-tertiary-800);
+    color: var(--color-white);
   }
 
   .nav-toggle__icon {
@@ -98,16 +104,18 @@ const current = Astro.url.pathname
     height: 1.5rem;
   }
 
-  /* mobil: ausklappbares Menü unter der Kopfzeile */
+  /* mobil: ausklappbares Menü direkt unter der Kopfzeile */
   .nav {
     display: none;
     position: absolute;
-    top: 107px;
+    top: 100%;
     left: 0;
     right: 0;
     z-index: 10;
-    width: 100%;
+    padding-block: 0.5rem;
+    border-top: 1px solid var(--color-tertiary-700);
     background-color: var(--color-tertiary-900);
+    box-shadow: var(--shadow-lg);
   }
 
   .nav:global(.is-open) {
@@ -116,22 +124,29 @@ const current = Astro.url.pathname
 
   .nav__link {
     display: block;
-    padding: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--color-accent-600);
     font-size: 1rem;
     line-height: 1.5rem;
     font-weight: 500;
+    transition: color 0.15s ease-in-out;
   }
 
-  .nav__link:focus {
-    outline: none;
+  .nav__link:hover,
+  .nav__link[aria-current='page'] {
+    color: var(--color-white);
   }
 
-  .nav__link--current {
+  .nav__link[aria-current='page'] {
     font-weight: 700;
   }
 
   @media (min-width: 40rem) {
     .site-header__inner {
+      padding-inline: 1.5rem;
+    }
+
+    .nav__link {
       padding-inline: 1.5rem;
     }
   }
@@ -148,19 +163,22 @@ const current = Astro.url.pathname
 
     .nav {
       display: flex;
-      position: relative;
-      top: auto;
-      left: auto;
-      right: auto;
-      z-index: auto;
-      width: auto;
+      position: static;
       gap: 2.5rem;
+      padding: 0;
+      border: 0;
       background-color: transparent;
+      box-shadow: none;
     }
 
     .nav__link {
       display: inline;
       padding: 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav__link[aria-current='page'] {
+      border-bottom-color: var(--color-primary-900);
     }
   }
 </style>

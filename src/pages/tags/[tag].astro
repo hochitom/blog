@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro'
+import ContentSection from '../../components/ContentSection.astro'
 import PostList from '../../components/PostList.astro'
 import { getPosts, getTagList } from '../../lib/content'
 
@@ -12,12 +13,12 @@ export async function getStaticPaths() {
 }
 
 const { tag, posts } = Astro.props
+const title = `Artikel zu „${tag}“`
 ---
 
-<Base title={`Tagged “${tag}”`}>
-  <h1>Tagged “{tag}”</h1>
-
-  <PostList posts={posts} />
-
-  <p>See <a href="/tags/">all tags</a>.</p>
+<Base title={title}>
+  <ContentSection title={title}>
+    <PostList posts={posts} />
+    <p><a href="/tags/">Alle Tags ansehen</a></p>
+  </ContentSection>
 </Base>

@@ -1,3 +1,49 @@
 @import './tokens.css';
 @import './reset.css';
 @import './prose.css';
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-white);
+  color: var(--color-tertiary-900);
+}
+
+/* Footer bleibt auch auf kurzen Seiten unten */
+main {
+  flex: 1;
+}
+
+/* sichtbarer Tastaturfokus; auf dunklen Flächen hell (--focus-color) */
+:focus-visible {
+  outline: 2px solid var(--focus-color, var(--color-primary-900));
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 20;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-900);
+  color: var(--color-white);
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
