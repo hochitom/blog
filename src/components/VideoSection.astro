@@ -1,19 +1,28 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import VideoList from './VideoList.astro'
+import SectionHead from './SectionHead.astro'
 
 interface Props {
   title: string
   videos: CollectionEntry<'videos'>[]
+  // horizontaler Slider statt Raster
+  slider?: boolean
+  // Link „Alle Videos“ anzeigen
+  showAll?: boolean
 }
 
-const { title, videos } = Astro.props
+const { title, videos, slider = false, showAll = true } = Astro.props
 ---
 
 <div class="video-section">
   <div class="video-section__inner">
-    <h2 class="video-section__title">{title}</h2>
-    <VideoList videos={videos} />
+    <SectionHead
+      title={title}
+      href={showAll ? '/videos/' : undefined}
+      linkText="Alle Videos"
+    />
+    <VideoList videos={videos} slider={slider} />
   </div>
 </div>
 
@@ -23,61 +32,20 @@ const { title, videos } = Astro.props
   }
 
   .video-section__inner {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
     max-width: var(--width-content);
     margin-inline: auto;
     padding: 3rem 1rem;
-  }
-
-  .video-section__title {
-    color: var(--color-tertiary-900);
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    font-weight: 800;
-    letter-spacing: -0.025em;
-  }
-
-  .video-section__title::after {
-    content: '';
-    display: block;
-    width: 3rem;
-    height: 0.25rem;
-    margin-top: 0.75rem;
-    border-radius: var(--radius-full);
-    background-color: var(--color-primary-900);
   }
 
   @media (min-width: 40rem) {
     .video-section__inner {
       padding-inline: 1.5rem;
     }
-
-    .video-section__title {
-      font-size: 2.25rem;
-    }
-  }
-
-  @media (min-width: 48rem) {
-    .video-section__title {
-      max-width: 36rem;
-    }
   }
 
   @media (min-width: 64rem) {
     .video-section__inner {
-      padding: 6rem 2rem;
-    }
-
-    .video-section__title {
-      max-width: 48rem;
-    }
-  }
-
-  @media (min-width: 80rem) {
-    .video-section__title {
-      max-width: none;
+      padding: 5rem 2rem;
     }
   }
 </style>

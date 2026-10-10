@@ -78,6 +78,11 @@ const year = new Date().getFullYear()
       </a>
     </div>
 
+    <p class="site-footer__legal">
+      <a href="/impressum/" class="site-footer__legal-link">Impressum</a>
+      <a href="/datenschutz/" class="site-footer__legal-link">Datenschutz</a>
+    </p>
+
     <p class="site-footer__copyright">
       &copy; 2015–{year} Thomas Hoch&ouml;rtler | hochitom.at
     </p>
@@ -87,7 +92,7 @@ const year = new Date().getFullYear()
 <style>
   .site-footer {
     --focus-color: var(--color-white);
-    background-color: var(--color-tertiary-900);
+    background-color: var(--color-ink-deep);
   }
 
   .site-footer__inner {
@@ -110,10 +115,33 @@ const year = new Date().getFullYear()
   }
 
   .site-footer__link {
-    color: var(--color-tertiary-300);
-    font-size: 1rem;
+    color: var(--color-accent-900);
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 1.125rem;
     line-height: 1.5rem;
     transition: color 0.15s ease-in-out;
+  }
+
+  .site-footer__legal {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .site-footer__legal-link {
+    color: var(--color-tertiary-300);
+    font-size: 0.875rem;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: color 0.15s ease-in-out;
+  }
+
+  .site-footer__legal-link:hover {
+    color: var(--color-white);
   }
 
   .social {

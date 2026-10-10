@@ -529,3 +529,57 @@
 .prose-lg>:last-child {
   margin-bottom:0;
 }
+
+
+/* Neues Design: Serifen im Fließtext, Versalien-Überschriften, Rot für Zitate */
+.prose {
+  color: var(--color-tertiary-900);
+  font-family: var(--font-serif);
+}
+
+.prose-lg {
+  line-height: 1.7;
+}
+
+.prose :is(h1, h2, h3, h4) {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.prose h2 {
+  font-size: 2.25em;
+}
+
+.prose h3 {
+  font-size: 1.75em;
+  line-height: 1;
+}
+
+.prose a:not([class]) {
+  color: var(--color-primary-950);
+  font-weight: 400;
+  text-decoration-color: currentColor;
+}
+
+.prose a:not([class]):hover {
+  color: var(--color-tertiary-900);
+}
+
+.prose blockquote {
+  padding-left: 1.5rem;
+  border-left: 0.375rem solid var(--color-primary-900);
+  color: var(--color-tertiary-900);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+  content: none;
+}
+
+.prose figcaption {
+  font-family: var(--font-sans);
+}

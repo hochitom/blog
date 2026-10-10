@@ -26,7 +26,10 @@ Die Auffahrt zum Reiterkogel beginnt recht entspannt. Vom Spielberhaus kommt man
 
 Die letzten eineinhalb Kilometer bis zum Gipfel gilt es sich dann noch einmal hart zu erkämpfen. Immer wieder stellen sich einem Rampen mit bis zu 20% Steigung in den Weg. Am Gipfel angekommen wird man dann aber mit einem traumhaften Panorama belohnt. Zwar versteckten sich die Hohen Tauern mit dem Großglockner in einer dicken Wolkenschicht, doch auch die umliegenden Berge des Glemmtals auf der einen, und das steinerne Meer auf der anderen Seite, entschädigten uns für die Strapazen.
 
-<iframe style="border: 0;" src="embed?pb=!1m0!4v1500290688398!6m8!1m7!1sF%3A-KhPiA_bni5I%2FWWxGuC3WO3I%2FAAAAAAAABbg%2Fs64VbUwUWo0dxcNjI_bzxdvnzZ1mGPzUwCLIBGAYYCw!2m2!1d47.40123699999999!2d12.5934654!3f189.44275433889524!4f-14.853515009593877!5f0.4000000000000002" width="600" height="450" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+<div class="consent-embed" data-consent-embed data-src="https://www.google.com/maps/embed?pb=!1m0!4v1500290688398!6m8!1m7!1sF%3A-KhPiA_bni5I%2FWWxGuC3WO3I%2FAAAAAAAABbg%2Fs64VbUwUWo0dxcNjI_bzxdvnzZ1mGPzUwCLIBGAYYCw!2m2!1d47.40123699999999!2d12.5934654!3f189.44275433889524!4f-14.853515009593877!5f0.4000000000000002" data-title="Street View vom Gipfel des Reiterkogels">
+<button type="button" class="consent-embed__button">Street View vom Gipfel laden</button>
+<p class="consent-embed__notice">Mit dem Klick wird Google Street View geladen. Dabei werden Daten wie deine IP-Adresse an Google übertragen. <a href="/datenschutz/#google-maps-street-view">Mehr dazu</a></p>
+</div>
 
 ## Von nun an ging es bergab
 

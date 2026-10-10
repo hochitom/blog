@@ -1,32 +1,203 @@
 ---
 import Base from '../layouts/Base.astro'
-import ContentSection from '../components/ContentSection.astro'
-import VideoEmbed from '../components/VideoEmbed.astro'
+import Hero from '../components/Hero.astro'
 import VideoSection from '../components/VideoSection.astro'
+import SectionHead from '../components/SectionHead.astro'
 import PostList from '../components/PostList.astro'
-import { getPosts, getVideos } from '../lib/content'
+import TopicTiles from '../components/TopicTiles.astro'
+import { excerpt, getPosts, getVideos } from '../lib/content'
+import { htmlDateString, readableDate } from '../lib/dates'
+import { site } from '../lib/site'
 
 const videos = await getVideos()
 const posts = await getPosts()
 
-const latestVideo = videos[0]
-const latestVideos = videos.filter(v => v.data.id !== latestVideo.data.id).slice(0, 4)
+// es kommen keine neuen Videos mehr: nur die beliebtesten, in einem Slider
 const popularVideos = [...videos]
   .sort((a, b) => b.data.viewCount - a.data.viewCount)
-  .slice(0, 4)
-const latestPosts = posts.slice(0, 5)
+  .slice(0, 8)
+
+const [featured, ...morePosts] = posts
+const listedPosts = morePosts.slice(0, 5)
 ---
 
 <Base>
-  <ContentSection title={latestVideo.data.title} wide dark>
-    <VideoEmbed slot="before" id={latestVideo.data.id} title={latestVideo.data.title} />
-  </ContentSection>
+  <Hero videos={videos} />
 
-  <VideoSection title="Aktuelle Videos" videos={latestVideos} />
-  <VideoSection title="Beliebte Videos" videos={popularVideos} />
+  <section class="intro">
+    <div class="intro__inner">
+      <p class="intro__lead display">Hi, ich bin Thomas und schreibe übers Radfahren.</p>
+      <p class="intro__text">{site.description.replace(/^Hi, ich bin Thomas und /, 'Ich ')}</p>
+    </div>
+  </section>
 
-  <ContentSection title="Aktuelle Blogartikel">
-    <PostList posts={latestPosts} total={posts.length} />
-    <p>Mehr Artikel gibts im <a href="/posts/">Archiv</a>.</p>
-  </ContentSection>
+  <VideoSection title="Beliebte Videos" videos={popularVideos} slider />
+
+  <section class="blog">
+    <div class="blog__inner">
+      <SectionHead title="Aus dem Blog" href="/posts/" linkText="Zum Archiv" />
+      <div class="blog__grid">
+        <a href={`/posts/${featured.id}/`} class="featured">
+          <p class="featured__meta eyebrow">
+            {featured.data.tags.join(' · ')}
+            <time datetime={htmlDateString(featured.data.date)}>{readableDate(featured.data.date)}</time>
+          </p>
+          <h3 class="featured__title display">{featured.data.title}</h3>
+          <p class="featured__excerpt">{excerpt(featured.body ?? '')}</p>
+        </a>
+        <PostList posts={listedPosts} />
+      </div>
+    </div>
+  </section>
+
+  <TopicTiles />
+
+  <section class="about">
+    <div class="about__inner">
+      <p class="about__label eyebrow">Über mich</p>
+      <h2 class="about__title display">Seit dem elften Lebensjahr auf dem Mountainbike</h2>
+      <p class="about__text">
+        Ich liebe es, mit dem Fahrrad Orte zu erreichen, an die man normalerweise nicht
+        kommen würde. Sitze ich nicht auf dem Rad, haue ich als Software-Entwickler in die Tasten.
+      </p>
+      <p><a href="/ueber-mich/" class="button">Mehr über mich</a></p>
+    </div>
+  </section>
 </Base>
+
+<style>
+  .intro {
+    background-color: var(--color-white);
+  }
+
+  .intro__inner {
+    display: grid;
+    gap: 1.5rem;
+    max-width: var(--width-content);
+    margin-inline: auto;
+    padding: 3rem 1rem 0;
+  }
+
+  .intro__lead {
+    max-width: 40rem;
+    color: var(--color-tertiary-900);
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    text-wrap: balance;
+  }
+
+  .intro__text {
+    max-width: 32.5rem;
+    color: var(--color-tertiary-700);
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .blog {
+    border-block: 1px solid var(--color-line);
+    background-color: var(--color-paper);
+  }
+
+  .blog__inner,
+  .about__inner {
+    max-width: var(--width-content);
+    margin-inline: auto;
+    padding: 3rem 1rem;
+  }
+
+  .blog__grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .featured {
+    display: block;
+  }
+
+  .featured__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    color: var(--color-primary-950);
+  }
+
+  .featured__meta time {
+    color: var(--color-tertiary-700);
+  }
+
+  .featured__title {
+    margin-top: 0.75rem;
+    color: var(--color-tertiary-900);
+    font-size: clamp(2.75rem, 6vw, 4rem);
+    transition: color 0.15s ease-in-out;
+  }
+
+  .featured:hover .featured__title {
+    color: var(--color-primary-900);
+  }
+
+  .featured__excerpt {
+    max-width: 40rem;
+    margin-top: 1rem;
+    color: var(--color-tertiary-700);
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .about {
+    background-color: var(--color-white);
+  }
+
+  .about__inner {
+    display: grid;
+    justify-items: start;
+    gap: 1.25rem;
+  }
+
+  .about__label {
+    color: var(--color-primary-950);
+  }
+
+  .about__title {
+    max-width: 44rem;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    text-wrap: balance;
+  }
+
+  .about__text {
+    max-width: 38rem;
+    color: var(--color-tertiary-700);
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 40rem) {
+    .intro__inner,
+    .blog__inner,
+    .about__inner {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .intro__inner {
+      grid-template-columns: 3fr 2fr;
+      align-items: end;
+      gap: 4rem;
+      padding: 5rem 2rem 0;
+    }
+
+    .blog__inner,
+    .about__inner {
+      padding: 5rem 2rem;
+    }
+
+    .blog__grid {
+      grid-template-columns: 3fr 2fr;
+      gap: 4rem;
+    }
+  }
+</style>

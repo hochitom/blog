@@ -11,16 +11,24 @@ interface Props {
 }
 
 const { video } = Astro.props
-const latest = (await getVideos()).slice(0, 4)
+const popular = (await getVideos())
+  .filter(v => v.id !== video.id)
+  .sort((a, b) => b.data.viewCount - a.data.viewCount)
+  .slice(0, 8)
 ---
 
 <Base title={video.data.title}>
   <ContentSection title={video.data.title} wide>
-    <VideoEmbed slot="before" id={video.data.id} title={video.data.title} />
+    <VideoEmbed
+      slot="before"
+      id={video.data.id}
+      title={video.data.title}
+      thumbnail={video.data.thumbnail}
+    />
 
     <slot />
     <p><a href={video.data.link}>Video auf YouTube anschauen</a></p>
   </ContentSection>
 
-  <VideoSection title="Aktuelle Videos" videos={latest} />
+  <VideoSection title="Beliebte Videos" videos={popular} slider />
 </Base>

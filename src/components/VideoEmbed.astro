@@ -1,32 +1,141 @@
 ---
+import { Picture } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+
 interface Props {
   id: string
   title: string
+  // lokales Vorschaubild: YouTube wird erst nach einem Klick geladen (Zwei-Klick-Lösung)
+  thumbnail: ImageMetadata
 }
 
-const { id, title } = Astro.props
+const { id, title, thumbnail } = Astro.props
 ---
 
-<div class="embed">
-  <iframe
-    src={`https://www.youtube-nocookie.com/embed/${id}`}
-    title={title}
-    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen></iframe>
+<div class="embed-wrap" data-embed>
+  <div class="embed">
+    <a
+      href={`https://www.youtube.com/watch?v=${id}`}
+      class="embed__play"
+      data-embed-load
+      aria-label={`Video abspielen: ${title}`}
+    >
+      <Picture
+        src={thumbnail}
+        formats={['webp']}
+        fallbackFormat="jpeg"
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 64rem) 66vw, 100vw"
+        class="embed__image"
+        alt=""
+        loading="eager"
+      />
+      <span class="embed__button" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"></path></svg>
+      </span>
+    </a>
+  </div>
+  <p class="embed__notice">
+    Mit dem Klick wird das Video von YouTube (Google) geladen. Dabei werden Daten wie
+    deine IP-Adresse übertragen.{' '}
+    <a href="/datenschutz/#youtube-videos">Mehr dazu</a>
+  </p>
 </div>
 
 <style>
+  .embed-wrap {
+    margin-bottom: 1.5rem;
+  }
+
   /* 16:9 */
   .embed {
     position: relative;
-    margin-bottom: 1.5rem;
-    padding-bottom: 56%;
+    aspect-ratio: 16 / 9;
+    background-color: var(--color-ink-deep);
   }
 
-  iframe {
+  .embed__play {
     position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .embed :global(picture) {
+    display: block;
+    height: 100%;
+  }
+
+  .embed__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .embed__button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.5rem;
+    height: 5.5rem;
+    background-color: var(--color-primary-900);
+    color: var(--color-white);
+    transform: translate(-50%, -50%);
+    transition: background-color 0.15s ease-in-out;
+  }
+
+  .embed__button svg {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .embed__play:hover .embed__button {
+    background-color: var(--color-primary-950);
+  }
+
+  .embed__notice {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    opacity: 0.8;
+  }
+
+  .embed__notice a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .embed :global(iframe) {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     border: 0;
   }
 </style>
+
+<script>
+  // Erst der Klick lädt den YouTube-Player (youtube-nocookie.com). Ohne JavaScript
+  // führt der Link direkt zu YouTube.
+  document.addEventListener('click', event => {
+    const link = (event.target as Element).closest<HTMLAnchorElement>('[data-embed-load]')
+    if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey) return
+    event.preventDefault()
+
+    const wrap = link.closest<HTMLElement>('[data-embed]')
+    const id = new URL(link.href).searchParams.get('v')
+    if (!wrap || !id) return
+
+    const iframe = document.createElement('iframe')
+    iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`
+    iframe.title = link.getAttribute('aria-label')?.replace(/^Video abspielen: /, '') ?? 'Video'
+    iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+    iframe.allowFullscreen = true
+
+    link.replaceWith(iframe)
+    wrap.querySelector('.embed__notice')?.remove()
+    iframe.focus()
+  })
+</script>
