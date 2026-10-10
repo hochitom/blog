@@ -17,12 +17,9 @@ const { videos } = Astro.props
         <a href={`/videos/${video.id}/`} class="space-y-4">
           <Picture
             src={video.data.thumbnail}
-            width={300}
-            widths={[300, 600]}
-            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
             formats={['webp']}
             fallbackFormat="jpeg"
-            class="shadow-lg rounded-lg"
+            class="w-full shadow-lg rounded-lg"
             alt={video.data.title}
           />
 
