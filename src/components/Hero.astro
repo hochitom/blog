@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content'
+import { getImage } from 'astro:assets'
 import VideoEmbed from './VideoEmbed.astro'
 import { htmlDateString, readableDate } from '../lib/dates'
 
@@ -11,8 +12,12 @@ interface Props {
 const { videos } = Astro.props
 // Standard ohne JavaScript: das erste Video
 const video = videos[0]
-const pool = videos.map(v => ({
+const thumbs = await Promise.all(
+  videos.map(v => getImage({ src: v.data.thumbnail, width: 960, format: 'jpeg' })),
+)
+const pool = videos.map((v, index) => ({
   id: v.data.id,
+  thumb: thumbs[index].src,
   slug: v.id,
   title: v.data.title,
   date: readableDate(v.data.date),
@@ -24,7 +29,7 @@ const json = JSON.stringify(pool).replace(/</g, '\\u003c')
 <section class="hero" data-hero>
   <div class="hero__inner">
     <div class="hero__player">
-      <VideoEmbed id={video.data.id} title={video.data.title} deferred />
+      <VideoEmbed id={video.data.id} title={video.data.title} thumbnail={video.data.thumbnail} />
     </div>
     <div class="hero__text">
       <p class="hero__label eyebrow">Video</p>
@@ -48,9 +53,15 @@ const json = JSON.stringify(pool).replace(/</g, '\\u003c')
     var hero = document.querySelector('[data-hero]');
     if (!hero || videos.length < 2) return;
     var v = videos[Math.floor(Math.random() * videos.length)];
-    var iframe = hero.querySelector('iframe');
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + v.id;
-    iframe.title = v.title;
+    var play = hero.querySelector('[data-embed-load]');
+    play.href = 'https://www.youtube.com/watch?v=' + v.id;
+    play.setAttribute('aria-label', 'Video abspielen: ' + v.title);
+    var picture = hero.querySelector('picture');
+    var img = picture.querySelector('img');
+    picture.querySelectorAll('source').forEach(function (s) { s.remove(); });
+    img.removeAttribute('srcset');
+    img.removeAttribute('sizes');
+    img.src = v.thumb;
     hero.querySelector('[data-hero-title]').textContent = v.title;
     var date = hero.querySelector('[data-hero-date]');
     date.textContent = v.date;

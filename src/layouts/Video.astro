@@ -19,7 +19,12 @@ const popular = (await getVideos())
 
 <Base title={video.data.title}>
   <ContentSection title={video.data.title} wide>
-    <VideoEmbed slot="before" id={video.data.id} title={video.data.title} />
+    <VideoEmbed
+      slot="before"
+      id={video.data.id}
+      title={video.data.title}
+      thumbnail={video.data.thumbnail}
+    />
 
     <slot />
     <p><a href={video.data.link}>Video auf YouTube anschauen</a></p>
