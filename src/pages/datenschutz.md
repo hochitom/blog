@@ -27,9 +27,15 @@ Mit dem Klick wird der Player von `youtube-nocookie.com` geladen. Dabei erhält 
 
 Mehr dazu in der [Datenschutzerklärung von Google](https://policies.google.com/privacy).
 
-## Reichweitenmessung (Matomo)
+## Google Maps (Street View)
 
-Zur anonymen Auswertung der Zugriffe nutze ich die Software Matomo, die auf einem eigenen Server (`statistik.hochoertler.at`) betrieben wird. Es werden keine Daten an Dritte weitergegeben. [Konfiguration ergänzen und prüfen: Cookies ja/nein, IP-Anonymisierung, Aufbewahrungsdauer, Widerspruchsmöglichkeit (Opt-out).] Rechtsgrundlage ist mein berechtigtes Interesse an der Optimierung des Angebots (Art. 6 Abs. 1 lit. f DSGVO).
+Im Artikel zur Reiterkogel-Tour ist eine Street-View-Ansicht von Google Maps (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland) eingebunden. Sie wird **erst nach deinem Klick** geladen. Bis dahin findet keine Verbindung zu Google statt.
+
+Mit dem Klick erhält Google u. a. deine IP-Adresse und Browserdaten und kann Cookies bzw. ähnliche Technologien einsetzen. Google kann die Daten auch in Drittländer wie die USA übermitteln. Rechtsgrundlage ist deine Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a DSGVO und § 165 Abs. 3 TKG 2021), die du jederzeit widerrufen kannst, indem du die Seite verlässt bzw. neu lädst.
+
+## Cookies und Webanalyse
+
+Diese Seite setzt selbst keine Cookies und verwendet keine Analyse- oder Trackingdienste.
 
 ## Externe Links
 

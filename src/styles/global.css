@@ -89,3 +89,45 @@ main {
 .button:hover {
   background-color: var(--color-primary-950);
 }
+
+/* Zwei-Klick-Einbettung für Drittanbieter-Inhalte in Artikeln (siehe Base.astro) */
+.consent-embed {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 600px;
+  margin-block: 2rem;
+  font-family: var(--font-sans);
+}
+
+.consent-embed__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-ink-deep);
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.consent-embed__button:hover {
+  background-color: var(--color-primary-950);
+}
+
+.consent-embed__notice {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--color-tertiary-700);
+}
+
+.consent-embed iframe {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 0;
+}
