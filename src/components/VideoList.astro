@@ -10,32 +10,76 @@ interface Props {
 const { videos } = Astro.props
 ---
 
-<ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-4 lg:gap-x-8">
+<ul class="video-list">
   {
     videos.map(video => (
       <li>
-        <a href={`/videos/${video.id}/`} class="space-y-4">
+        <a href={`/videos/${video.id}/`} class="video-card">
           <Picture
             src={video.data.thumbnail}
             formats={['webp']}
             fallbackFormat="jpeg"
-            class="w-full shadow-lg rounded-lg"
+            class="video-card__image"
             alt={video.data.title}
           />
 
-          <div class="space-y-2">
-            <div class="text-lg leading-6 font-medium">
-              <h4>{video.data.title}</h4>
-              <time
-                class="text-tertiary-600"
-                datetime={htmlDateString(video.data.date)}
-              >
-                {readableDate(video.data.date)}
-              </time>
-            </div>
+          <div class="video-card__title">
+            <h4>{video.data.title}</h4>
+            <time
+              class="video-card__date"
+              datetime={htmlDateString(video.data.date)}
+            >
+              {readableDate(video.data.date)}
+            </time>
           </div>
         </a>
       </li>
     ))
   }
 </ul>
+
+<style>
+  .video-list {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .video-card {
+    display: block;
+  }
+
+  /* <picture> und das Bild darin: Astro reicht die Klasse an das <img> weiter */
+  .video-card :global(picture) {
+    margin-bottom: 1rem;
+  }
+
+  .video-card__image {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .video-card__title {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+  }
+
+  .video-card__date {
+    color: var(--color-tertiary-600);
+  }
+
+  @media (min-width: 40rem) {
+    .video-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .video-list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: 2rem;
+    }
+  }
+</style>

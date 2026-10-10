@@ -1,6 +1,6 @@
 # hochitom.at
 
-Persönlicher Blog über Radfahren, gebaut mit [Astro](https://astro.build) und Tailwind CSS und gehostet auf Netlify.
+Persönlicher Blog über Radfahren, gebaut mit [Astro](https://astro.build) und Vanilla CSS und gehostet auf Netlify.
 
 ## Voraussetzungen
 
@@ -24,10 +24,10 @@ npm run check   # Typen und Content-Schema prüfen
 * `src/pages/` – Routen; `bikes.md`, `ausruestung.md` und `ueber-mich.md` sind einfache Markdown-Seiten
 * `src/layouts/`, `src/components/` – Layouts und Komponenten
 * `src/lib/` – Seitendaten (`site.ts`), Navigation, Datumsformat und Collection-Helfer
-* `src/styles/` – Tailwind-Quelle (`style.css`) und Typografie (`prose.css`)
+* `src/styles/` – CSS ohne Framework: `tokens.css` (Farben, Schriften, Maße), `reset.css`, `prose.css` (Typografie für Fließtext); komponentenspezifische Styles stehen scoped in den `.astro`-Dateien
 * `src/assets/` – Bilder; Astro erzeugt daraus optimierte Varianten
 * `public/` – unveränderte Dateien (`sw.js`, Videos als mp4 unter `public/img/`)
-* `astro.config.mjs` – Astro-Konfiguration (Markdown-Plugins, Sitemap, Tailwind)
+* `astro.config.mjs` – Astro-Konfiguration (Markdown-Plugins, Sitemap)
 
 ## Videos
 

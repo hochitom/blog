@@ -1,7 +1,9 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import Base from './Base.astro'
-import VideoList from '../components/VideoList.astro'
+import ContentSection from '../components/ContentSection.astro'
+import VideoEmbed from '../components/VideoEmbed.astro'
+import VideoSection from '../components/VideoSection.astro'
 import { getVideos } from '../lib/content'
 
 interface Props {
@@ -13,36 +15,12 @@ const latest = (await getVideos()).slice(0, 4)
 ---
 
 <Base title={video.data.title}>
-  <div class="relative py-16 bg-white overflow-hidden">
-    <div class="relative px-4 sm:px-6 lg:px-8 max-w-screen-xl mx-auto">
-      <div class="relative mb-6" style="padding-bottom: 56%">
-        <iframe
-          class="w-full absolute"
-          style="height: 100%; border: 0"
-          src={`https://www.youtube-nocookie.com/embed/${video.data.id}`}
-          title={video.data.title}
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-      </div>
-      <div class="text-lg max-w-prose mx-auto mb-6">
-        <h1 class="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">{video.data.title}</h1>
-      </div>
-      <div class="prose prose-lg text-gray-500 mx-auto">
-        <slot />
-        <p><a href={video.data.link}>Video auf YouTube anschauen</a></p>
-      </div>
-    </div>
-  </div>
+  <ContentSection title={video.data.title} wide>
+    <VideoEmbed slot="before" id={video.data.id} title={video.data.title} />
 
-  <div class="bg-white">
-    <div class="mx-auto py-12 px-4 max-w-screen-xl sm:px-6 lg:px-8 lg:py-24">
-      <div class="space-y-12">
-        <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
-          <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Aktuelle Videos</h2>
-        </div>
+    <slot />
+    <p><a href={video.data.link}>Video auf YouTube anschauen</a></p>
+  </ContentSection>
 
-        <VideoList videos={latest} />
-      </div>
-    </div>
-  </div>
+  <VideoSection title="Aktuelle Videos" videos={latest} />
 </Base>
