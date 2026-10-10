@@ -6,15 +6,23 @@ import SectionHead from './SectionHead.astro'
 interface Props {
   title: string
   videos: CollectionEntry<'videos'>[]
+  // horizontaler Slider statt Raster
+  slider?: boolean
+  // Link „Alle Videos“ anzeigen
+  showAll?: boolean
 }
 
-const { title, videos } = Astro.props
+const { title, videos, slider = false, showAll = true } = Astro.props
 ---
 
 <div class="video-section">
   <div class="video-section__inner">
-    <SectionHead title={title} href="/videos/" linkText="Alle Videos" />
-    <VideoList videos={videos} />
+    <SectionHead
+      title={title}
+      href={showAll ? '/videos/' : undefined}
+      linkText="Alle Videos"
+    />
+    <VideoList videos={videos} slider={slider} />
   </div>
 </div>
 

@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro'
 import Hero from '../components/Hero.astro'
-import VideoTabs from '../components/VideoTabs.astro'
+import VideoSection from '../components/VideoSection.astro'
 import SectionHead from '../components/SectionHead.astro'
 import PostList from '../components/PostList.astro'
 import TopicTiles from '../components/TopicTiles.astro'
@@ -13,10 +13,11 @@ const videos = await getVideos()
 const posts = await getPosts()
 
 const latestVideo = videos[0]
-const latestVideos = videos.filter(v => v.data.id !== latestVideo.data.id).slice(0, 4)
+// es kommen keine neuen Videos mehr: nur die beliebtesten, in einem Slider
 const popularVideos = [...videos]
+  .filter(v => v.data.id !== latestVideo.data.id)
   .sort((a, b) => b.data.viewCount - a.data.viewCount)
-  .slice(0, 4)
+  .slice(0, 8)
 
 const [featured, ...morePosts] = posts
 const listedPosts = morePosts.slice(0, 5)
@@ -32,7 +33,7 @@ const listedPosts = morePosts.slice(0, 5)
     </div>
   </section>
 
-  <VideoTabs latest={latestVideos} popular={popularVideos} />
+  <VideoSection title="Beliebte Videos" videos={popularVideos} slider />
 
   <section class="blog">
     <div class="blog__inner">
