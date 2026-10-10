@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro'
+import VideoList from '../components/VideoList.astro'
+import PostList from '../components/PostList.astro'
+import { getPosts, getVideos } from '../lib/content'
+
+const videos = await getVideos()
+const posts = await getPosts()
+
+const latestVideo = videos[0]
+const latestVideos = videos.filter(v => v.data.id !== latestVideo.data.id).slice(0, 4)
+const popularVideos = [...videos]
+  .sort((a, b) => b.data.viewCount - a.data.viewCount)
+  .slice(0, 4)
+const latestPosts = posts.slice(0, 5)
+---
+
+<Base>
+  <div class="relative py-16 bg-tertiary-900 text-white overflow-hidden">
+    <div class="relative px-4 sm:px-6 lg:px-8 max-w-screen-xl mx-auto">
+      <div class="relative mb-6" style="padding-bottom: 56%">
+        <iframe
+          class="w-full absolute"
+          style="height: 100%; border: 0"
+          src={`https://www.youtube-nocookie.com/embed/${latestVideo.data.id}`}
+          title={latestVideo.data.title}
+          allowfullscreen></iframe>
+      </div>
+      <div class="text-lg max-w-prose mx-auto mb-6">
+        <h1 class="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">{latestVideo.data.title}</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white">
+    <div class="mx-auto py-12 px-4 max-w-screen-xl sm:px-6 lg:px-8 lg:py-24">
+      <div class="space-y-12">
+        <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
+          <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Aktuelle Videos</h2>
+        </div>
+
+        <VideoList videos={latestVideos} />
+      </div>
+    </div>
+
+    <div class="mx-auto py-12 px-4 max-w-screen-xl sm:px-6 lg:px-8 lg:py-24">
+      <div class="space-y-12">
+        <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
+          <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl">Beliebte Videos</h2>
+        </div>
+
+        <VideoList videos={popularVideos} />
+      </div>
+    </div>
+  </div>
+
+  <div class="relative py-16 bg-white overflow-hidden">
+    <div class="relative px-4 sm:px-6 lg:px-8">
+      <div class="text-lg max-w-prose mx-auto mb-6">
+        <h1 class="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">Aktuelle Blogartikel</h1>
+      </div>
+      <div class="prose prose-lg text-gray-500 mx-auto">
+        <PostList posts={latestPosts} total={posts.length} />
+        <p>Mehr Artikel gibts im <a href="/posts/">Archiv</a>.</p>
+      </div>
+    </div>
+  </div>
+</Base>

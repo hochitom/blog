@@ -1,6 +1,12 @@
 [build]
-  publish = "_site"
+  publish = "dist"
   command = "npm run build"
 
 [build.environment]
   NODE_VERSION = "24"
+
+# @astrojs/sitemap erzeugt sitemap-index.xml; die alte URL bleibt erreichbar
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 301
