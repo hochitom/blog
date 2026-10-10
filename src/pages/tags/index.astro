@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro'
+import { getTagList } from '../../lib/content'
+
+const tags = await getTagList()
+---
+
+<Base title="Tags">
+  <h1>Tags</h1>
+
+  {tags.map(tag => <a href={`/tags/${tag}/`} class="tag">{tag}</a>)}
+</Base>

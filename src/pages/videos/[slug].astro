@@ -1,0 +1,17 @@
+---
+import { render } from 'astro:content'
+import Video from '../../layouts/Video.astro'
+import { getVideos } from '../../lib/content'
+
+export async function getStaticPaths() {
+  const videos = await getVideos()
+  return videos.map(video => ({ params: { slug: video.id }, props: { video } }))
+}
+
+const { video } = Astro.props
+const { Content } = await render(video)
+---
+
+<Video video={video}>
+  <Content />
+</Video>

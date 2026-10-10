@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { htmlDateString, readableDate } from '../lib/dates'
+import { getTagList } from '../lib/content'
+
+interface Props {
+  // neueste zuerst
+  posts: CollectionEntry<'posts'>[]
+  // Anzahl, ab der rückwärts gezählt wird (Standard: Länge der Liste)
+  total?: number
+}
+
+const { posts, total = posts.length } = Astro.props
+const tagList = await getTagList()
+---
+
+<ol reversed style={`counter-reset: start-from ${total + 1}`}>
+  {
+    posts.map(post => (
+      <li class="text-tertiary-600 postlist-item">
+        <a href={`/posts/${post.id}/`} class="postlist-link">
+          {post.data.title}
+        </a>{' '}
+        <time class="postlist-date" datetime={htmlDateString(post.data.date)}>
+          {readableDate(post.data.date)}
+        </time>{' '}
+        {
+          post.data.tags
+            .filter(tag => tagList.includes(tag))
+            .map(tag => (
+              <a
+                href={`/tags/${tag}/`}
+                class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-red-100 text-red-800"
+              >
+                {tag}
+              </a>
+            ))
+            .flatMap(link => [link, ' '])
+        }
+      </li>
+    ))
+  }
+</ol>
