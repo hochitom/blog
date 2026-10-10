@@ -4,30 +4,60 @@ import VideoEmbed from './VideoEmbed.astro'
 import { htmlDateString, readableDate } from '../lib/dates'
 
 interface Props {
-  video: CollectionEntry<'videos'>
+  // alle Videos, aus denen zufällig eines gezeigt wird
+  videos: CollectionEntry<'videos'>[]
 }
 
-const { video } = Astro.props
+const { videos } = Astro.props
+// Standard ohne JavaScript: das erste Video
+const video = videos[0]
+const pool = videos.map(v => ({
+  id: v.data.id,
+  slug: v.id,
+  title: v.data.title,
+  date: readableDate(v.data.date),
+  iso: htmlDateString(v.data.date),
+}))
+// </ in Titeln darf das Skript nicht beenden
+const json = JSON.stringify(pool).replace(/</g, '\\u003c')
 ---
-
-<section class="hero">
+<section class="hero" data-hero>
   <div class="hero__inner">
     <div class="hero__player">
-      <VideoEmbed id={video.data.id} title={video.data.title} />
+      <VideoEmbed id={video.data.id} title={video.data.title} deferred />
     </div>
     <div class="hero__text">
-      <p class="hero__label eyebrow">Neuestes Video</p>
-      <h1 class="hero__title display">{video.data.title}</h1>
-      <time class="hero__date" datetime={htmlDateString(video.data.date)}>
+      <p class="hero__label eyebrow">Video</p>
+      <h1 class="hero__title display" data-hero-title>{video.data.title}</h1>
+      <time class="hero__date" data-hero-date datetime={htmlDateString(video.data.date)}>
         {readableDate(video.data.date)}
       </time>
       <div class="hero__actions">
-        <a href={`/videos/${video.id}/`} class="button">Video ansehen</a>
+        <a href={`/videos/${video.id}/`} class="button" data-hero-link>Video ansehen</a>
         <a href="/videos/" class="hero__link">Alle Videos</a>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Die Seite ist statisch: bei jedem Aufruf wählt dieses Skript ein zufälliges Video.
+     Ohne JavaScript bleibt das serverseitig gerenderte Video stehen. -->
+<script is:inline set:html={`
+  (function () {
+    var videos = ${json};
+    var hero = document.querySelector('[data-hero]');
+    if (!hero || videos.length < 2) return;
+    var v = videos[Math.floor(Math.random() * videos.length)];
+    var iframe = hero.querySelector('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + v.id;
+    iframe.title = v.title;
+    hero.querySelector('[data-hero-title]').textContent = v.title;
+    var date = hero.querySelector('[data-hero-date]');
+    date.textContent = v.date;
+    date.setAttribute('datetime', v.iso);
+    hero.querySelector('[data-hero-link]').href = '/videos/' + v.slug + '/';
+  })();
+`}></script>
 
 <style>
   .hero {

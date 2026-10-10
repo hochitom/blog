@@ -12,10 +12,8 @@ import { site } from '../lib/site'
 const videos = await getVideos()
 const posts = await getPosts()
 
-const latestVideo = videos[0]
 // es kommen keine neuen Videos mehr: nur die beliebtesten, in einem Slider
 const popularVideos = [...videos]
-  .filter(v => v.data.id !== latestVideo.data.id)
   .sort((a, b) => b.data.viewCount - a.data.viewCount)
   .slice(0, 8)
 
@@ -24,7 +22,7 @@ const listedPosts = morePosts.slice(0, 5)
 ---
 
 <Base>
-  <Hero video={latestVideo} />
+  <Hero videos={videos} />
 
   <section class="intro">
     <div class="intro__inner">
