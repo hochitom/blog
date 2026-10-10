@@ -1,0 +1,72 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import VideoList from './VideoList.astro'
+
+interface Props {
+  title: string
+  videos: CollectionEntry<'videos'>[]
+}
+
+const { title, videos } = Astro.props
+---
+
+<div class="video-section">
+  <div class="video-section__inner">
+    <h2 class="video-section__title">{title}</h2>
+    <VideoList videos={videos} />
+  </div>
+</div>
+
+<style>
+  .video-section {
+    background-color: var(--color-white);
+  }
+
+  .video-section__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: var(--width-content);
+    margin-inline: auto;
+    padding: 3rem 1rem;
+  }
+
+  .video-section__title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+
+  @media (min-width: 40rem) {
+    .video-section__inner {
+      padding-inline: 1.5rem;
+    }
+
+    .video-section__title {
+      font-size: 2.25rem;
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .video-section__title {
+      max-width: 36rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .video-section__inner {
+      padding: 6rem 2rem;
+    }
+
+    .video-section__title {
+      max-width: 48rem;
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .video-section__title {
+      max-width: none;
+    }
+  }
+</style>

@@ -1,0 +1,94 @@
+---
+interface Props {
+  title: string
+  // schmaler Text oder breite Fläche (z. B. mit Video)
+  wide?: boolean
+  // dunkler Hintergrund, z. B. für das Video auf der Startseite
+  dark?: boolean
+}
+
+const { title, wide = false, dark = false } = Astro.props
+const hasBody = Astro.slots.has('default')
+---
+
+<div class:list={['section', { 'section--dark': dark }]}>
+  <div class:list={['section__inner', { 'section__inner--wide': wide }]}>
+    <slot name="before" />
+
+    <div class="section__header">
+      <slot name="meta" />
+      <h1 class="section__title">{title}</h1>
+    </div>
+
+    {
+      hasBody && (
+        <div class="prose prose-lg section__body">
+          <slot />
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .section {
+    position: relative;
+    overflow: hidden;
+    padding-block: 4rem;
+    background-color: var(--color-white);
+  }
+
+  .section--dark {
+    background-color: var(--color-tertiary-900);
+    color: var(--color-white);
+  }
+
+  .section__inner {
+    position: relative;
+    padding-inline: 1rem;
+  }
+
+  .section__inner--wide {
+    max-width: var(--width-content);
+    margin-inline: auto;
+  }
+
+  .section__header {
+    max-width: var(--width-prose);
+    margin-inline: auto;
+    margin-bottom: 1.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .section__title {
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.875rem;
+    line-height: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+
+  .section__body {
+    margin-inline: auto;
+  }
+
+  @media (min-width: 40rem) {
+    .section__inner {
+      padding-inline: 1.5rem;
+    }
+
+    .section__title {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .section__inner {
+      padding-inline: 2rem;
+    }
+  }
+</style>

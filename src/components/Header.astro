@@ -5,72 +5,162 @@ import { navigation } from '../lib/navigation'
 const current = Astro.url.pathname
 ---
 
-<div class="relative bg-tertiary-900 text-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
-      <div class="w-0 flex-1">
+<div class="site-header">
+  <div class="site-header__inner">
+    <div class="site-header__bar">
+      <div class="site-header__brand">
         <a href="/" aria-label="hochitom.at">
           <Logo />
         </a>
       </div>
 
-      <div class="-mr-2 -my-2 md:hidden">
-        <button
-          type="button"
-          aria-label="Navigation"
-          class="js-toggle-nav inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-        >
-          <svg
-            class="h-6 w-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
-      </div>
-
-      <nav
-        class="js-nav hidden absolute md:relative md:flex space-x-10 w-full md:w-auto bg-tertiary-900 md:bg-transparent mobile-navigation"
+      <button
+        type="button"
+        class="nav-toggle js-toggle-nav"
+        aria-label="Navigation"
+        aria-expanded="false"
       >
-        {
-          navigation.map(entry => (
-            <a
-              href={entry.url}
-              class:list={[
-                'text-base leading-6 hover:text-gray-900 focus:outline-none focus:text-gray-900 transition ease-in-out duration-150 block md:inline',
-                entry.url === current
-                  ? 'text-gray-900 font-bold'
-                  : 'text-gray-500 font-medium',
-              ]}
-            >
-              {entry.title}
-            </a>
-          ))
-        }
+        <svg
+          class="nav-toggle__icon"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+
+      <nav class="nav js-nav">
+        {navigation.map((entry) => (
+          <a
+            href={entry.url}
+            class:list={[
+              'nav__link',
+              { 'nav__link--current': entry.url === current },
+            ]}
+          >
+            {entry.title}
+          </a>
+        ))}
       </nav>
     </div>
   </div>
 </div>
 
-<style is:global>
-  @media screen and (max-width: 768px) {
-    .mobile-navigation {
-      top: 107px;
-      left: 0;
-      right: 0;
-      z-index: 10;
+<style>
+  .site-header {
+    position: relative;
+    background-color: var(--color-tertiary-900);
+    color: var(--color-white);
+  }
+
+  .site-header__inner {
+    max-width: var(--width-content);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  .site-header__bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 1.5rem;
+  }
+
+  .site-header__brand {
+    flex: 1;
+    width: 0;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: -0.5rem;
+    margin-block: -0.5rem;
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+  }
+
+  .nav-toggle:focus {
+    outline: none;
+  }
+
+  .nav-toggle__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  /* mobil: ausklappbares Menü unter der Kopfzeile */
+  .nav {
+    display: none;
+    position: absolute;
+    top: 107px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    width: 100%;
+    background-color: var(--color-tertiary-900);
+  }
+
+  .nav:global(.is-open) {
+    display: block;
+  }
+
+  .nav__link {
+    display: block;
+    padding: 10px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+  }
+
+  .nav__link:focus {
+    outline: none;
+  }
+
+  .nav__link--current {
+    font-weight: 700;
+  }
+
+  @media (min-width: 40rem) {
+    .site-header__inner {
+      padding-inline: 1.5rem;
     }
-    .mobile-navigation a {
-      margin: 0 !important;
-      padding: 10px;
+  }
+
+  @media (min-width: 48rem) {
+    .site-header__bar {
+      justify-content: flex-start;
+      gap: 2.5rem;
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+
+    .nav {
+      display: flex;
+      position: relative;
+      top: auto;
+      left: auto;
+      right: auto;
+      z-index: auto;
+      width: auto;
+      gap: 2.5rem;
+      background-color: transparent;
+    }
+
+    .nav__link {
+      display: inline;
+      padding: 0;
     }
   }
 </style>
@@ -80,6 +170,7 @@ const current = Astro.url.pathname
   const nav = document.querySelector('.js-nav')
 
   button?.addEventListener('click', () => {
-    nav?.classList.toggle('hidden')
+    const open = nav?.classList.toggle('is-open') ?? false
+    button.setAttribute('aria-expanded', String(open))
   })
 </script>

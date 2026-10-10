@@ -2,73 +2,154 @@
 import { navigation } from '../lib/navigation'
 ---
 
-<footer class="bg-tertiary-900">
-  <div
-    class="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden space-y-8 sm:px-6 lg:px-8"
-  >
-    <nav class="-mx-5 -my-2 flex flex-wrap justify-center">
-      {
-        navigation.map(entry => (
-          <div class="px-5 py-2">
-            <a
-              href={entry.url}
-              class="text-base leading-6 text-tertiary-300 hover:text-secondary-900"
-            >
-              {entry.title}
-            </a>
-          </div>
-        ))
-      }
-    </nav>
-
-    <div class="mt-8 flex justify-center space-x-6">
-          <a href="https://www.youtube.com/channel/UCxpmQStO4F1ycGde21DXolg" class="text-tertiary-600 hover:text-gray-500">
-            <span class="sr-only">YouTube</span>
-            <svg
-              class="h-6 w-6"
-              viewBox="0 0 547 384"
-              aria-hidden="true"
-              fill="currentColor"
-              style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-              <g transform="matrix(1,0,0,1,-14.933,-64)">
-                <path d="M549.655,124.083C543.374,100.433 524.868,81.807 501.371,75.486C458.781,64 288,64 288,64C288,64 117.22,64 74.629,75.486C51.132,81.808 32.626,100.433 26.345,124.083C14.933,166.95 14.933,256.388 14.933,256.388C14.933,256.388 14.933,345.826 26.345,388.693C32.626,412.343 51.132,430.193 74.629,436.514C117.22,448 288,448 288,448C288,448 458.78,448 501.371,436.514C524.868,430.193 543.374,412.343 549.655,388.693C561.067,345.826 561.067,256.388 561.067,256.388C561.067,256.388 561.067,166.95 549.655,124.083ZM232.145,337.591L232.145,175.185L374.884,256.39L232.145,337.591Z" style="fill-rule:nonzero;"/>
-              </g>
-            </svg>
-
-          </a>
-          <a href="https://www.strava.com/athletes/8952554" class="text-tertiary-600 hover:text-gray-500" rel="nofollow">
-            <span class="sr-only">Strava</span>
-            <svg
-              class="h-6 w-6"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 1219 1688"
-              style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
-            >
-              <g transform="matrix(1,0,0,1,-625,-390.625)">
-                <g>
-                  <path d="M1078.12,1375L1468.75,2078.12L1843.75,1375L1609.38,1375L1468.75,1640.62L1312.5,1375L1078.12,1375Z" style="fill-opacity:0.6;"/>
-                  <path d="M1125,390.625L1609.38,1375L625,1375L1125,390.625ZM1125,984.375L1312.5,1375L921.875,1375L1125,984.375Z" />
-                </g>
-              </g>
-            </svg>
-          </a>
-          <a href="https://twitter.com/hochitom" class="text-tertiary-600 hover:text-gray-500" rel="nofollow">
-            <span class="sr-only">Twitter</span>
-            <svg
-              class="h-6 w-6"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
-              />
-            </svg>
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <nav class="site-footer__nav">
+      {navigation.map((entry) => (
+        <div class="site-footer__item">
+          <a href={entry.url} class="site-footer__link">
+            {entry.title}
           </a>
         </div>
-        <p class="mt-8 text-center text-base leading-6 text-tertiary-600">
+      ))}
+    </nav>
+
+    <div class="social">
+      <a
+        href="https://www.youtube.com/channel/UCxpmQStO4F1ycGde21DXolg"
+        class="social__link"
+      >
+        <span class="visually-hidden">YouTube</span>
+        <svg
+          class="social__icon"
+          viewBox="0 0 547 384"
+          aria-hidden="true"
+          fill="currentColor"
+          style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
+        >
+          <g transform="matrix(1,0,0,1,-14.933,-64)">
+            <path
+              d="M549.655,124.083C543.374,100.433 524.868,81.807 501.371,75.486C458.781,64 288,64 288,64C288,64 117.22,64 74.629,75.486C51.132,81.808 32.626,100.433 26.345,124.083C14.933,166.95 14.933,256.388 14.933,256.388C14.933,256.388 14.933,345.826 26.345,388.693C32.626,412.343 51.132,430.193 74.629,436.514C117.22,448 288,448 288,448C288,448 458.78,448 501.371,436.514C524.868,430.193 543.374,412.343 549.655,388.693C561.067,345.826 561.067,256.388 561.067,256.388C561.067,256.388 561.067,166.95 549.655,124.083ZM232.145,337.591L232.145,175.185L374.884,256.39L232.145,337.591Z"
+              style="fill-rule:nonzero;"
+            />
+          </g>
+        </svg>
+      </a>
+      <a
+        href="https://www.strava.com/athletes/8952554"
+        class="social__link"
+        rel="nofollow"
+      >
+        <span class="visually-hidden">Strava</span>
+        <svg
+          class="social__icon"
+          aria-hidden="true"
+          fill="currentColor"
+          viewBox="0 0 1219 1688"
+          style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
+        >
+          <g transform="matrix(1,0,0,1,-625,-390.625)">
+            <g>
+              <path
+                d="M1078.12,1375L1468.75,2078.12L1843.75,1375L1609.38,1375L1468.75,1640.62L1312.5,1375L1078.12,1375Z"
+                style="fill-opacity:0.6;"
+              />
+              <path d="M1125,390.625L1609.38,1375L625,1375L1125,390.625ZM1125,984.375L1312.5,1375L921.875,1375L1125,984.375Z" />
+            </g>
+          </g>
+        </svg>
+      </a>
+      <a
+        href="https://twitter.com/hochitom"
+        class="social__link"
+        rel="nofollow"
+      >
+        <span class="visually-hidden">Twitter</span>
+        <svg
+          class="social__icon"
+          aria-hidden="true"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+        </svg>
+      </a>
+    </div>
+
+    <p class="site-footer__copyright">
       &copy; 2020 Thomas Hoch&ouml;rtler | hochitom.at
     </p>
   </div>
 </footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-tertiary-900);
+  }
+
+  .site-footer__inner {
+    max-width: var(--width-content);
+    margin-inline: auto;
+    padding: 3rem 1rem;
+    overflow: hidden;
+  }
+
+  .site-footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-inline: -1.25rem;
+    margin-block: -0.5rem;
+  }
+
+  .site-footer__item {
+    padding: 0.5rem 1.25rem;
+  }
+
+  .site-footer__link {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--color-tertiary-300);
+  }
+
+  @media (hover: hover) {
+    .site-footer__link:hover {
+      color: var(--color-secondary-900);
+    }
+  }
+
+  .social {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-block: 2rem;
+  }
+
+  .social__link {
+    color: var(--color-tertiary-600);
+  }
+
+  .social__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .site-footer__copyright {
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--color-tertiary-600);
+  }
+
+  @media (min-width: 40rem) {
+    .site-footer__inner {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .site-footer__inner {
+      padding-inline: 2rem;
+    }
+  }
+</style>

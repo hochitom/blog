@@ -14,24 +14,21 @@ const { posts, total = posts.length } = Astro.props
 const tagList = await getTagList()
 ---
 
-<ol reversed style={`counter-reset: start-from ${total + 1}`}>
+<ol reversed class="post-list" style={`counter-reset: start-from ${total + 1}`}>
   {
     posts.map(post => (
-      <li class="text-tertiary-600 postlist-item">
-        <a href={`/posts/${post.id}/`} class="postlist-link">
+      <li class="post-list__item">
+        <a href={`/posts/${post.id}/`} class="post-list__link">
           {post.data.title}
         </a>{' '}
-        <time class="postlist-date" datetime={htmlDateString(post.data.date)}>
+        <time class="post-list__date" datetime={htmlDateString(post.data.date)}>
           {readableDate(post.data.date)}
         </time>{' '}
         {
           post.data.tags
             .filter(tag => tagList.includes(tag))
             .map(tag => (
-              <a
-                href={`/tags/${tag}/`}
-                class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-red-100 text-red-800"
-              >
+              <a href={`/tags/${tag}/`} class="tag-pill">
                 {tag}
               </a>
             ))
@@ -41,3 +38,21 @@ const tagList = await getTagList()
     ))
   }
 </ol>
+
+<style>
+  .post-list__item {
+    color: var(--color-tertiary-600);
+  }
+
+  /* Hinweis: In .prose (Archiv) gewinnt dessen Linkstil (Farbe, Schriftstärke 600),
+     auf den Tag-Seiten gelten Schriftstärke 500 und die Textfarbe der Zeile. */
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+  }
+</style>
