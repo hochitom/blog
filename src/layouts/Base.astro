@@ -19,6 +19,8 @@ const { title = site.title, description = site.description } = Astro.props
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#2b2d42" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     <link
       rel="alternate"
@@ -30,9 +32,11 @@ const { title = site.title, description = site.description } = Astro.props
   </head>
 
   <body>
+    <a href="#inhalt" class="skip-link">Zum Inhalt springen</a>
+
     <Header />
 
-    <main>
+    <main id="inhalt">
       <slot />
     </main>
 

@@ -1,5 +1,7 @@
 ---
 import { navigation } from '../lib/navigation'
+
+const year = new Date().getFullYear()
 ---
 
 <footer class="site-footer">
@@ -77,13 +79,14 @@ import { navigation } from '../lib/navigation'
     </div>
 
     <p class="site-footer__copyright">
-      &copy; 2020 Thomas Hoch&ouml;rtler | hochitom.at
+      &copy; 2015–{year} Thomas Hoch&ouml;rtler | hochitom.at
     </p>
   </div>
 </footer>
 
 <style>
   .site-footer {
+    --focus-color: var(--color-white);
     background-color: var(--color-tertiary-900);
   }
 
@@ -107,15 +110,10 @@ import { navigation } from '../lib/navigation'
   }
 
   .site-footer__link {
+    color: var(--color-tertiary-300);
     font-size: 1rem;
     line-height: 1.5rem;
-    color: var(--color-tertiary-300);
-  }
-
-  @media (hover: hover) {
-    .site-footer__link:hover {
-      color: var(--color-secondary-900);
-    }
+    transition: color 0.15s ease-in-out;
   }
 
   .social {
@@ -126,7 +124,8 @@ import { navigation } from '../lib/navigation'
   }
 
   .social__link {
-    color: var(--color-tertiary-600);
+    color: var(--color-tertiary-300);
+    transition: color 0.15s ease-in-out;
   }
 
   .social__icon {
@@ -134,11 +133,16 @@ import { navigation } from '../lib/navigation'
     height: 1.5rem;
   }
 
+  .site-footer__link:hover,
+  .social__link:hover {
+    color: var(--color-white);
+  }
+
   .site-footer__copyright {
     text-align: center;
     font-size: 1rem;
     line-height: 1.5rem;
-    color: var(--color-tertiary-600);
+    color: var(--color-tertiary-300);
   }
 
   @media (min-width: 40rem) {

@@ -55,14 +55,27 @@ const { videos } = Astro.props
 
   .video-card__image {
     width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+
+  .video-card:hover .video-card__image {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.15);
   }
 
   .video-card__title {
     font-size: 1.125rem;
     line-height: 1.5rem;
     font-weight: 500;
+    transition: color 0.15s ease-in-out;
+  }
+
+  .video-card:hover .video-card__title {
+    color: var(--color-primary-900);
   }
 
   .video-card__date {

@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import { htmlDateString, readableDate } from '../lib/dates'
+import TagPill from './TagPill.astro'
 import { getTagList } from '../lib/content'
 
 interface Props {
@@ -27,11 +28,7 @@ const tagList = await getTagList()
         {
           post.data.tags
             .filter(tag => tagList.includes(tag))
-            .map(tag => (
-              <a href={`/tags/${tag}/`} class="tag-pill">
-                {tag}
-              </a>
-            ))
+            .map(tag => <TagPill tag={tag} />)
             .flatMap(link => [link, ' '])
         }
       </li>
@@ -44,15 +41,13 @@ const tagList = await getTagList()
     color: var(--color-tertiary-600);
   }
 
-  /* Hinweis: In .prose (Archiv) gewinnt dessen Linkstil (Farbe, Schriftstärke 600),
-     auf den Tag-Seiten gelten Schriftstärke 500 und die Textfarbe der Zeile. */
-  .tag-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.125rem 0.75rem;
-    border-radius: var(--radius-full);
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 500;
+  .post-list__link {
+    color: var(--color-tertiary-900);
+    font-weight: 600;
+    transition: color 0.15s ease-in-out;
+  }
+
+  .post-list__link:hover {
+    color: var(--color-primary-900);
   }
 </style>
